@@ -1,0 +1,1364 @@
+<title>不用死背的中國史</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap');
+
+  :root{
+    /* 宣紙米 + 朱砂 + 墨 */
+    --paper:#f7f1e3;
+    --paper-2:#fffdf7;
+    --card:#fffdf7;
+    --ink:#2b2620;
+    --ink-soft:#5f574b;
+    --line:#e2d7bf;
+    --line-strong:#d3c39e;
+    --red:#b8412e;        /* 朱砂 / 主線 */
+    --red-soft:#f4ddd4;
+    --gold:#e8b53c;       /* 口訣 highlighter */
+    --gold-soft:#fbedc6;
+    --teal:#2f8f83;       /* 老師吐槽 */
+    --teal-soft:#dcefec;
+    --warn:#d9722e;       /* 會考陷阱 */
+    --warn-soft:#f8e3d0;
+    --blue:#3a6ea5;       /* 圖表 / 因果 */
+    --blue-soft:#dde8f3;
+    --shadow:0 1px 2px rgba(60,45,20,.06), 0 8px 24px rgba(60,45,20,.07);
+    --radius:14px;
+    --maxw:940px;
+    --serif:"Noto Serif TC", "Songti TC", serif;
+    --sans:"Noto Sans TC", system-ui, sans-serif;
+  }
+  :root:not([data-theme="light"]){
+    @media (prefers-color-scheme: dark){
+      --paper:#191612;
+      --paper-2:#221e18;
+      --card:#221e18;
+      --ink:#efe7d6;
+      --ink-soft:#b6ab97;
+      --line:#3a3227;
+      --line-strong:#4a4033;
+      --red:#e8735c;
+      --red-soft:#3a251f;
+      --gold:#f0c766;
+      --gold-soft:#3a3016;
+      --teal:#5cc0b2;
+      --teal-soft:#173029;
+      --warn:#eb9457;
+      --warn-soft:#3a2717;
+      --blue:#7ba7d6;
+      --blue-soft:#1b2a3a;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#191612;
+    --paper-2:#221e18;
+    --card:#221e18;
+    --ink:#efe7d6;
+    --ink-soft:#b6ab97;
+    --line:#3a3227;
+    --line-strong:#4a4033;
+    --red:#e8735c;
+    --red-soft:#3a251f;
+    --gold:#f0c766;
+    --gold-soft:#3a3016;
+    --teal:#5cc0b2;
+    --teal-soft:#173029;
+    --warn:#eb9457;
+    --warn-soft:#3a2717;
+    --blue:#7ba7d6;
+    --blue-soft:#1b2a3a;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--sans);line-height:1.75;font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:20px}
+
+  /* ---------- 頂部列 ---------- */
+  header.bar{
+    position:sticky;top:env(safe-area-inset-top,0px);z-index:50;
+    background:color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .bar-in{max-width:var(--maxw);margin:0 auto;padding:10px 20px;
+    display:flex;align-items:center;gap:14px}
+  .brand{display:flex;align-items:center;gap:9px;font-family:var(--serif);
+    font-weight:900;font-size:16px;letter-spacing:.02em;white-space:nowrap}
+  .seal{width:30px;height:30px;flex:none;border-radius:7px;background:var(--red);
+    color:#fff;display:grid;place-items:center;font-family:var(--serif);
+    font-weight:900;font-size:15px;line-height:1;transform:rotate(-3deg)}
+  .bar-nav{margin-left:auto;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+  .bar-nav::-webkit-scrollbar{display:none}
+  .bar-nav a{font-size:13px;color:var(--ink-soft);text-decoration:none;
+    padding:6px 10px;border-radius:8px;white-space:nowrap;font-weight:500}
+  .bar-nav a:hover{color:var(--red);background:var(--red-soft)}
+  .tbtn{flex:none;border:1px solid var(--line-strong);background:var(--card);
+    color:var(--ink);width:34px;height:34px;border-radius:9px;cursor:pointer;
+    font-size:15px;display:grid;place-items:center}
+  .tbtn:hover{border-color:var(--red);color:var(--red)}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:48px 0 30px;text-align:center}
+  .eyebrow{font-size:13px;letter-spacing:.28em;color:var(--red);font-weight:700;
+    text-transform:uppercase}
+  .hero h1{font-family:var(--serif);font-weight:900;
+    font-size:clamp(30px,7vw,52px);line-height:1.12;margin:14px 0 6px;
+    text-wrap:balance;letter-spacing:.01em}
+  .hero h1 em{font-style:normal;color:var(--red);
+    background:linear-gradient(transparent 62%, var(--gold-soft) 62%)}
+  .hero .sub{font-size:15px;color:var(--ink-soft);margin:0 auto;max-width:34em}
+  .creed{margin:26px auto 0;max-width:40em;font-family:var(--serif);
+    font-size:clamp(17px,3.4vw,22px);font-weight:700;line-height:1.6;
+    color:var(--ink);border-left:4px solid var(--red);
+    background:var(--card);padding:18px 22px;border-radius:0 var(--radius) var(--radius) 0;
+    box-shadow:var(--shadow);text-align:left}
+  .creed span{color:var(--red)}
+
+  /* ---------- section 標題 ---------- */
+  section{padding:34px 0;scroll-margin-top:70px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:18px;
+    border-bottom:2px solid var(--line-strong);padding-bottom:10px}
+  .sec-num{font-family:var(--serif);font-weight:900;color:var(--red);
+    font-size:15px;letter-spacing:.1em;flex:none}
+  .sec-head h2{font-family:var(--serif);font-weight:900;margin:0;
+    font-size:clamp(21px,4.6vw,28px);letter-spacing:.01em}
+
+  /* ---------- 朝代 GPS ---------- */
+  .gps-note{color:var(--ink-soft);font-size:14.5px;margin:-4px 0 20px}
+  .gps-note b{color:var(--red)}
+  .gps-flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:22px}
+  .gps-flow .k{font-family:var(--serif);font-weight:700;background:var(--red-soft);
+    color:var(--red);padding:5px 12px;border-radius:999px;font-size:14.5px}
+  .gps-flow .arr{color:var(--line-strong);font-weight:700}
+  .gps{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .dyn{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:14px 15px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .dyn::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;
+    background:var(--red);opacity:.85}
+  .dyn .n{font-family:var(--serif);font-weight:900;font-size:19px;
+    display:flex;align-items:center;gap:8px}
+  .dyn .tag{font-size:11px;font-weight:700;color:var(--red);background:var(--red-soft);
+    padding:2px 7px;border-radius:6px;letter-spacing:.05em}
+  .dyn .d{font-size:13px;color:var(--ink-soft);margin-top:5px;line-height:1.55}
+  .dyn.on{outline:2px solid var(--gold);}
+
+  /* ---------- 講義結構 ---------- */
+  .parts{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+  .part{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:15px 16px;box-shadow:var(--shadow)}
+  .part .h{font-family:var(--serif);font-weight:700;font-size:16px;
+    display:flex;gap:9px;align-items:center}
+  .part .h b{color:var(--red);font-size:13px;font-family:var(--sans)}
+  .part p{margin:7px 0 0;font-size:13.5px;color:var(--ink-soft)}
+
+  /* ---------- 章節總覽 ---------- */
+  .chapters{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+  .chap{display:block;text-decoration:none;color:inherit;background:var(--card);
+    border:1px solid var(--line);border-radius:var(--radius);padding:16px 17px;
+    box-shadow:var(--shadow);transition:transform .15s, border-color .15s}
+  a.chap:hover{transform:translateY(-3px);border-color:var(--red)}
+  .chap .cn{font-size:12px;font-weight:700;color:var(--red);letter-spacing:.06em}
+  .chap h3{font-family:var(--serif);font-weight:900;font-size:18px;margin:5px 0 4px}
+  .chap p{margin:0;font-size:13px;color:var(--ink-soft);line-height:1.55}
+  .chap .st{margin-top:10px;font-size:11.5px;font-weight:700;padding:3px 9px;
+    border-radius:999px;display:inline-block}
+  .chap .st.ready{background:var(--red);color:#fff}
+  .chap .st.soon{background:var(--line);color:var(--ink-soft)}
+  .chap.disabled{opacity:.72}
+
+  /* ---------- 內文區塊 ---------- */
+  .lead-chap{background:linear-gradient(135deg,var(--red),color-mix(in srgb,var(--red) 70%, #000));
+    color:#fff;border-radius:18px;padding:26px 24px;margin-bottom:26px;box-shadow:var(--shadow)}
+  .lead-chap .cn{font-size:13px;letter-spacing:.2em;opacity:.85;font-weight:700}
+  .lead-chap h2{font-family:var(--serif);font-weight:900;margin:8px 0 8px;
+    font-size:clamp(23px,5.2vw,32px);color:#fff;border:0;text-wrap:balance}
+  .lead-chap p{margin:0;font-size:15px;opacity:.92;max-width:36em}
+
+  h3.block{font-family:var(--serif);font-weight:900;font-size:20px;
+    margin:30px 0 12px;display:flex;align-items:center;gap:9px}
+  p{margin:12px 0}
+  .body p, .body li{color:var(--ink)}
+  strong{color:var(--red)}
+
+  /* 對話 */
+  .talk{display:flex;gap:11px;margin:12px 0;align-items:flex-start}
+  .talk .who{flex:none;width:44px;height:44px;border-radius:50%;display:grid;
+    place-items:center;font-size:22px;background:var(--gold-soft);border:1px solid var(--line)}
+  .talk .say{background:var(--card);border:1px solid var(--line);border-radius:4px 14px 14px 14px;
+    padding:10px 14px;box-shadow:var(--shadow)}
+  .talk .say b{color:var(--ink);display:block;font-size:12px;color:var(--ink-soft);margin-bottom:2px}
+
+  /* 泛用 callout */
+  .box{border-radius:var(--radius);padding:16px 18px;margin:18px 0;box-shadow:var(--shadow);
+    border:1px solid var(--line)}
+  .box .bh{font-family:var(--serif);font-weight:900;font-size:16px;
+    display:flex;align-items:center;gap:8px;margin-bottom:6px}
+  .box p:first-of-type{margin-top:2px}
+  .box p:last-child{margin-bottom:0}
+
+  .box.mem{background:var(--gold-soft);border-color:var(--gold)}
+  .box.mem .bh{color:#8a6410}
+  :root[data-theme="dark"] .box.mem .bh,
+  :root:not([data-theme="light"]) .box.mem .bh{color:var(--gold)}
+  .box.mem .punch{font-family:var(--serif);font-weight:900;font-size:clamp(18px,4vw,22px);
+    line-height:1.5;color:var(--ink)}
+
+  .box.teacher{background:var(--teal-soft);border-color:var(--teal)}
+  .box.teacher .bh{color:var(--teal)}
+
+  .box.trap{background:var(--warn-soft);border-color:var(--warn)}
+  .box.trap .bh{color:var(--warn)}
+  .trap .no{text-decoration:line-through;color:var(--ink-soft)}
+  .trap .yes{color:var(--warn);font-weight:700}
+
+  .box.detect{background:var(--blue-soft);border-color:var(--blue)}
+  .box.detect .bh{color:var(--blue)}
+
+  /* 因果流程圖 */
+  .flow{margin:18px 0;display:flex;flex-direction:column;align-items:center;gap:0}
+  .flow .node{background:var(--card);border:1.5px solid var(--line-strong);
+    border-radius:10px;padding:9px 16px;font-weight:700;text-align:center;
+    box-shadow:var(--shadow);max-width:100%}
+  .flow .node.red{background:var(--red);color:#fff;border-color:var(--red)}
+  .flow .node.blue{background:var(--blue-soft);border-color:var(--blue);color:var(--ink)}
+  .flow .down{color:var(--red);font-size:20px;line-height:1;margin:4px 0;font-weight:900}
+  .flow .split{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+
+  /* 制度整合包 grid */
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0}
+  .chips .c{background:var(--card);border:1px solid var(--line-strong);border-radius:10px;
+    padding:9px 14px;font-weight:700;box-shadow:var(--shadow);text-align:center}
+  .chips .c b{display:block;font-size:12px;color:var(--red);font-weight:700}
+
+  /* 漢武帝 系統升級表 */
+  .upgrade{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin:16px 0}
+  .up{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--blue);
+    border-radius:10px;padding:13px 15px;box-shadow:var(--shadow)}
+  .up .t{font-weight:700;font-size:15px;display:flex;gap:8px;align-items:center}
+  .up .goal{font-size:13px;color:var(--ink-soft);margin-top:5px}
+  .up .goal b{color:var(--blue)}
+
+  /* 原創題 */
+  .quiz{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+  .quiz .qn{font-size:12px;font-weight:700;color:var(--red);letter-spacing:.05em}
+  .quiz .qtype{font-size:11px;font-weight:700;color:var(--ink-soft);background:var(--paper);
+    border:1px solid var(--line);padding:2px 8px;border-radius:999px;margin-left:6px}
+  .quiz .stem{font-weight:500;margin:8px 0 12px;line-height:1.7}
+  .quiz .opts{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+  .quiz .opts li{border:1.5px solid var(--line);border-radius:10px;padding:9px 13px;
+    cursor:pointer;transition:.12s;font-size:14.5px}
+  .quiz .opts li:hover{border-color:var(--red)}
+  .quiz .opts li .lab{font-weight:700;color:var(--red);margin-right:7px}
+  .quiz .opts li.correct{background:var(--teal-soft);border-color:var(--teal)}
+  .quiz .opts li.wrong{background:var(--warn-soft);border-color:var(--warn)}
+  .quiz .opts li.locked{cursor:default}
+  .quiz .exp{margin-top:12px;padding:12px 14px;background:var(--paper);border:1px dashed var(--line-strong);
+    border-radius:10px;font-size:14px;color:var(--ink-soft);line-height:1.7}
+  .quiz .exp b{color:var(--red)}
+  .quiz .exp[hidden]{display:none}
+
+  /* footer */
+  footer{border-top:1px solid var(--line);margin-top:20px;padding:26px 0 40px;
+    color:var(--ink-soft);font-size:13px;text-align:center}
+  footer .disc{max-width:42em;margin:0 auto 10px;line-height:1.7}
+
+  hr.soft{border:0;border-top:1px dashed var(--line-strong);margin:30px 0}
+
+  @media(max-width:520px){
+    .talk .who{width:38px;height:38px;font-size:18px}
+    .creed{padding:15px 17px}
+  }
+  @media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<header class="bar">
+  <div class="bar-in">
+    <div class="brand"><span class="seal">史</span>不用死背的中國史</div>
+    <nav class="bar-nav">
+      <a href="#gps">朝代 GPS</a>
+      <a href="#how">怎麼用</a>
+      <a href="#toc">章節</a>
+      <a href="#ch1">第一章</a>
+      <a href="#ch2">第二章</a>
+      <a href="#ch3">第三章</a>
+      <a href="#ch4">第四章</a>
+      <a href="#ch5">第五章</a>
+      <a href="#ch6">第六章</a>
+      <a href="#ch7">第七章</a>
+    </nav>
+    <button class="tbtn" id="theme" title="切換深淺色" aria-label="切換深淺色">◐</button>
+  </div>
+</header>
+
+<div class="wrap body">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow">八年級歷史 · 名師記憶講義</div>
+    <h1>歷史不是背年代<br>是<em>一群人</em>做的一連串選擇</h1>
+    <p class="sub">中國史從來不是朝代表。看懂「發生什麼事」，知識自己會黏上來。</p>
+    <div class="creed">
+      歷史不是一串年代，是一群人為了<span>解決問題</span>，做了一連串<span>選擇</span>。
+    </div>
+  </div>
+
+  <!-- 朝代 GPS -->
+  <section id="gps">
+    <div class="sec-head"><span class="sec-num">GPS</span><h2>朝代 GPS：先記這條骨架</h2></div>
+    <p class="gps-note">別急著背細節。先把這條主線刻進腦子，之後每個知識點都有地方掛。<b>點卡片看重點。</b></p>
+    <div class="gps-flow">
+      <span class="k">統一</span><span class="arr">→</span>
+      <span class="k">分裂</span><span class="arr">→</span>
+      <span class="k">再統一</span><span class="arr">→</span>
+      <span class="k">盛世</span><span class="arr">→</span>
+      <span class="k">經濟南移</span><span class="arr">→</span>
+      <span class="k">多元交流</span><span class="arr">→</span>
+      <span class="k">皇權集中</span><span class="arr">→</span>
+      <span class="k">西方衝擊</span>
+    </div>
+    <div class="gps" id="gpsgrid"></div>
+  </section>
+
+  <!-- 怎麼用 -->
+  <section id="how">
+    <div class="sec-head"><span class="sec-num">MAP</span><h2>這套講義怎麼用</h2></div>
+    <p>每一課都用同一套固定結構。你不是在讀課本，是在聽老師把故事講給你聽——然後順手幫你圈好會考會挖的洞。</p>
+    <div class="parts">
+      <div class="part"><div class="h"><b>01</b>🧵 歷史主線</div><p>一句故事線，先知道「到底發生什麼」。</p></div>
+      <div class="part"><div class="h"><b>02</b>🎬 故事課</div><p>重要概念用故事講，不是抄定義。</p></div>
+      <div class="part"><div class="h"><b>03</b>🗺 一圖秒懂</div><p>時間軸、地圖、因果圖、制度圖。</p></div>
+      <div class="part"><div class="h"><b>04</b>🧠 記憶梗</div><p>每章 5～10 個超短口訣。</p></div>
+      <div class="part"><div class="h"><b>05</b>⚠️ 會考陷阱</div><p>看到什麼關鍵字，別被騙。</p></div>
+      <div class="part"><div class="h"><b>06</b>🔥 素養題</div><p>原創情境、史料、圖表題。</p></div>
+      <div class="part"><div class="h"><b>07</b>📝 複習考</div><p>每 2～3 章一份段考型試卷。</p></div>
+    </div>
+  </section>
+
+  <!-- 章節總覽 -->
+  <section id="toc">
+    <div class="sec-head"><span class="sec-num">TOC</span><h2>八大故事章</h2></div>
+    <p class="gps-note">章節可依學生使用的翰林／康軒／南一版本再微調，主線相同。</p>
+    <div class="chapters">
+      <a class="chap" href="#ch1">
+        <div class="cn">第一章</div><h3>秦漢：第一次把中國做成一個大系統</h3>
+        <p>從七國亂戰到大一統，再把制度養大成帝國。</p>
+        <span class="st ready">✓ 完整成品</span>
+      </a>
+      <a class="chap" href="#ch2">
+        <div class="cn">第二章</div><h3>魏晉南北朝：大型分裂副本</h3>
+        <p>分裂為什麼反而帶來新文化？人往南、錢也往南。</p>
+        <span class="st ready">✓ 完整成品</span>
+      </a>
+      <a class="chap" href="#ch3">
+        <div class="cn">第三章</div><h3>隋唐：歷史的大型升級包</h3>
+        <p>隋把系統建起來，唐把系統玩到高峰。</p>
+        <span class="st ready">✓ 完整成品</span>
+      </a>
+      <a class="chap" href="#ch4">
+        <div class="cn">第四章</div><h3>宋：軍事不強，經濟文化為何超強</h3>
+        <p>重文、三大發明、城市與海上貿易。</p>
+        <span class="st ready">✓ 完整成品</span>
+      </a>
+      <a class="chap" href="#ch5">
+        <div class="cn">第五章</div><h3>元：一個超大地圖的帝國</h3>
+        <p>核心關鍵字只有兩個字——交流。</p>
+        <span class="st ready">✓ 完整成品</span>
+      </a>
+      <a class="chap" href="#ch6">
+        <div class="cn">第六章</div><h3>明清：帝國開始收緊</h3>
+        <p>皇帝把控制器拿回自己手上。</p>
+        <span class="st ready">✓ 完整成品</span>
+      </a>
+      <a class="chap" href="#ch7">
+        <div class="cn">第七章</div><h3>近代中國：一連串被迫開門</h3>
+        <p>不是五個獨立事件，是一條被撞開的大門。</p>
+        <span class="st ready">✓ 完整成品</span>
+      </a>
+      <div class="chap disabled">
+        <div class="cn">總複習</div><h3>中國史一張 A3 複習完</h3>
+        <p>最後把整套骨架濃縮成一張圖。</p>
+        <span class="st soon">製作中</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 第一章 ================= -->
+  <section id="ch1">
+    <div class="lead-chap">
+      <div class="cn">第一章</div>
+      <h2>秦漢：從七國亂戰到大一統</h2>
+      <p>秦：第一次把「中國」做成一個大系統。漢：把這個系統養大成帝國。這一章看懂了，後面每一朝都在跟它比較。</p>
+    </div>
+
+    <!-- 故事開場 -->
+    <h3 class="block">🎬 故事開場：你是一個秦國人</h3>
+    <p>先別管課本。想像你活在戰國末年，那時候的世界長這樣——</p>
+    <div class="gps-flow" style="margin:14px 0">
+      <span class="k">魏國</span><span class="k">趙國</span><span class="k">楚國</span><span class="k">齊國</span>
+      <span class="arr">…</span><span style="font-size:14px;color:var(--ink-soft)">各有各的制度、貨幣、文字</span>
+    </div>
+    <p>然後有一天：</p>
+    <div class="talk"><div class="who">👦</div><div class="say"><b>你</b>「聽說秦國把大家……全部打掉了？」</div></div>
+    <div class="talk"><div class="who">👑</div><div class="say"><b>秦始皇</b>「既然都歸我管了，那乾脆——<strong>全部統一</strong>。」</div></div>
+    <p>於是他做了一整包事：統一文字、統一貨幣、統一度量衡、推行郡縣制、修築交通與防禦工程。重點來了——</p>
+
+    <div class="box mem">
+      <div class="bh">🧠 超強記憶法</div>
+      <p class="punch">秦不是只統一土地，是「連生活規則一起統一」。</p>
+      <p>所以看到下面這組關鍵字，第一個要想到的就是「秦始皇的制度整合包」：</p>
+      <div class="chips">
+        <span class="c"><b>文字</b>書同文</span>
+        <span class="c"><b>貨幣</b>統一圓錢</span>
+        <span class="c"><b>度量衡</b>統一標準</span>
+        <span class="c"><b>地方</b>郡縣制</span>
+      </div>
+    </div>
+
+    <!-- 秦亡因果 -->
+    <h3 class="block">⚔️ 為什麼秦「建立很快，倒得也快」？</h3>
+    <p>秦統一才十幾年就崩了。別背「秦始皇很壞所以秦亡」——那是小學講法。真正的因果長這樣：</p>
+    <div class="flow">
+      <div class="node red">秦統一</div><div class="down">↓</div>
+      <div class="node">中央集權</div><div class="down">↓</div>
+      <div class="node">大型工程 ＋ 戰爭 ＋ 徭役</div><div class="down">↓</div>
+      <div class="node">人民負擔大增</div><div class="down">↓</div>
+      <div class="node">民間反抗</div><div class="down">↓</div>
+      <div class="node red">秦亡</div>
+    </div>
+
+    <div class="box trap">
+      <div class="bh">⚠️ 會考陷阱</div>
+      <p><span class="no">秦始皇很壞 → 所以秦亡</span>（❌ 這不是素養題要的答案）</p>
+      <p><span class="yes">政策造成社會負擔 → 民眾反抗 → 政權崩潰</span>（✓ 這才是因果關聯）</p>
+      <p style="font-size:13.5px;color:var(--ink-soft);margin-top:8px">108 課綱本來就更強調「因果、社會變遷」，不是背帝王年代。會考愛考的是你「懂不懂為什麼」。</p>
+    </div>
+
+    <hr class="soft">
+
+    <!-- 漢：把制度養大 -->
+    <h3 class="block">🧑 漢朝：把制度「養大」成帝國</h3>
+    <p>秦負責<strong>建立制度</strong>，漢負責<strong>把制度養大</strong>。這是兩章其實是同一個故事的兩段。</p>
+    <div class="flow">
+      <div class="node red">秦 · 統一制度</div>
+      <div class="down">↓</div>
+      <div class="node red">漢 · 把制度養大</div>
+      <div class="down">↓</div>
+      <div class="split">
+        <div class="node blue">皇帝權力</div>
+        <div class="node blue">官僚制度</div>
+        <div class="node blue">儒家思想</div>
+        <div class="node blue">對外擴張</div>
+        <div class="node blue">絲路交流</div>
+      </div>
+    </div>
+
+    <h3 class="block">👑 必記人物：漢武帝</h3>
+    <p>別死背「漢武帝做了什麼」。先問他心裡的<strong>那個問題</strong>：</p>
+    <div class="talk"><div class="who">👑</div><div class="say"><b>漢武帝</b>「我要怎麼讓這個帝國更穩、更大？」</div></div>
+    <p>他的每一個政策，都是在回答這句話：</p>
+    <div class="upgrade">
+      <div class="up"><div class="t">🏛 政治｜推恩令</div><div class="goal">目的：<b>削弱諸侯王勢力</b>，讓中央更能控制地方。</div></div>
+      <div class="up"><div class="t">📚 思想｜尊儒</div><div class="goal">目的：<b>讓思想與政治秩序一致</b>（董仲舒建議）。</div></div>
+      <div class="up"><div class="t">⚔️ 軍事｜對匈奴作戰</div><div class="goal">目的：<b>維持北方安全 ＋ 向外擴張</b>。</div></div>
+      <div class="up"><div class="t">🐫 對外｜張騫出使西域</div><div class="goal">結果：<b>與西域交流增加 → 絲路發展</b>。</div></div>
+    </div>
+
+    <div class="box mem">
+      <div class="bh">🧠 一句話記漢武帝</div>
+      <p class="punch">對內收權（推恩令）、對外開路（張騫），一手抓穩、一手撐大。</p>
+    </div>
+
+    <div class="box teacher">
+      <div class="bh">👨‍🏫 老師吐槽</div>
+      <p>「推恩令」很多人只會背名字，其實它<strong>陰險又高明</strong>：不是硬把諸侯的地收回來，而是規定諸侯要把封地<strong>分給所有兒子</strong>。</p>
+      <p>結果地越分越小、勢力自己就散了，中央連刀都不用動。👉 考題問「如何削弱地方而不引起反抗」，看到「分封給子弟、越分越小」就是它。</p>
+    </div>
+
+    <!-- 考題偵測器 -->
+    <h3 class="block">🔥 考題偵測器：看到這種題，你要想到什麼</h3>
+    <div class="box detect">
+      <div class="bh">🔎 關鍵字 → 反射動作</div>
+      <p>📌 題目說「某政策使地方豪強／諸侯勢力下降，中央能直接控制地方」<br>→ 想到 <strong>郡縣制</strong>（秦）或 <strong>推恩令</strong>（漢）。看它是「直接設官」還是「分封給子弟」來分辨。</p>
+      <p>📌 題目說「大量人員、商品經由西北往來於中國與西域之間」<br>→ 想到 <strong>張騫 → 絲路</strong>。</p>
+      <p>📌 題目說「一個政權統一後短期內因負擔過重而崩潰」<br>→ 想到 <strong>秦</strong> 的因果鏈，不是「暴君」二字。</p>
+    </div>
+
+    <!-- 原創題 -->
+    <h3 class="block">📝 原創練習題（點選項作答）</h3>
+    <p class="gps-note">全部原創，練的是「看到新題也會做」，不是背題庫。作答後會出現解析。</p>
+    <div id="quizzes"></div>
+
+  </section>
+
+  <!-- ================= 第二章 ================= -->
+  <section id="ch2">
+    <div class="lead-chap">
+      <div class="cn">第二章</div>
+      <h2>魏晉南北朝：中國的「大型分裂副本」</h2>
+      <p>將近 400 年天下大亂、政權一個換一個。但奇怪的是——分裂沒有讓中國停下來，反而長出新的民族、新的文化、新的經濟版圖。這一章要看的就是這件事。</p>
+    </div>
+
+    <!-- 故事開場 -->
+    <h3 class="block">🎬 故事開場：一場停不下來的亂局</h3>
+    <p>第一章的漢朝撐得很大，但東漢末年開始出問題：外戚、宦官、地方豪強、黃巾之亂……中央漸漸罩不住。接著就進入一段「分久必合、合久必分」的長期混戰。先看這條時間軸——</p>
+    <div class="flow">
+      <div class="node red">東漢末年 · 天下大亂</div><div class="down">↓</div>
+      <div class="node">三國鼎立</div>
+      <div class="down">↓</div>
+      <div class="split">
+        <div class="node blue">魏 · 北方</div>
+        <div class="node blue">蜀 · 西南</div>
+        <div class="node blue">吳 · 東南</div>
+      </div>
+      <div class="down">↓</div>
+      <div class="node">西晉 · 短暫統一</div><div class="down">↓</div>
+      <div class="node">「又開始亂了」（北方大亂）</div><div class="down">↓</div>
+      <div class="node red">南北朝 · 南北長期對峙</div>
+    </div>
+    <div class="talk"><div class="who">👦</div><div class="say"><b>你</b>「這麼亂，歷史應該就停在那邊了吧？」</div></div>
+    <div class="talk"><div class="who">👨‍🏫</div><div class="say"><b>老師</b>「剛好相反。這 400 年，中國偷偷做了三件大事。」</div></div>
+
+    <div class="box mem">
+      <div class="bh">🧠 這章的三個關鍵字</div>
+      <div class="chips">
+        <span class="c"><b>人</b>民族融合</span>
+        <span class="c"><b>錢</b>江南開發</span>
+        <span class="c"><b>文化</b>佛教興盛</span>
+      </div>
+      <p>整章你只要記住：<strong>分裂 ≠ 停滯</strong>。亂世反而逼出「大搬家、大融合、大交流」。</p>
+    </div>
+
+    <!-- 人口大搬家 -->
+    <h3 class="block">🚚 大事一：人口大搬家（錢也跟著搬）</h3>
+    <p>北方一直打仗，人活不下去怎麼辦？往南跑。這一跑，把整個中國的經濟版圖都改寫了：</p>
+    <div class="flow">
+      <div class="node red">北方戰亂</div><div class="down">↓</div>
+      <div class="node">人口大量往南遷</div><div class="down">↓</div>
+      <div class="node">江南人口增加</div><div class="down">↓</div>
+      <div class="node">帶來人力與技術，開發江南</div><div class="down">↓</div>
+      <div class="node red">江南經濟開始發展</div>
+    </div>
+    <div class="box mem">
+      <div class="bh">🧠 一句話記憶</div>
+      <p class="punch">人往南，錢也跟著南。</p>
+      <p>這句直接連到一個超大考點：<strong>經濟重心南移</strong>——它就是<strong>從這裡「開始」</strong>的。</p>
+    </div>
+
+    <div class="box trap">
+      <div class="bh">⚠️ 會考陷阱：南移的「開始」和「完成」不一樣</div>
+      <p><span class="yes">開始</span>：魏晉南北朝（北方人南遷、江南被開發）</p>
+      <p><span class="yes">完成</span>：南宋（經濟重心正式移到南方）</p>
+      <p style="margin-top:8px">👉 題目問「經濟重心南移<span class="no">開始</span>於哪個時期」→ 選<strong>魏晉南北朝</strong>；問「<span class="no">完成</span>」→ 才是南宋。看清楚問的是哪一個，這是最愛挖的洞。</p>
+    </div>
+
+    <!-- 民族融合 -->
+    <h3 class="block">🤝 大事二：民族大融合（北魏孝文帝）</h3>
+    <p>北方雖然亂，但游牧民族進來後，並不是「打完就走」，而是留下來一起生活。其中最有名的一步，是<strong>北魏孝文帝</strong>主動推的漢化改革：</p>
+    <div class="upgrade">
+      <div class="up"><div class="t">🏙 遷都</div><div class="goal">把首都遷到<b>洛陽</b>，靠近中原文化核心。</div></div>
+      <div class="up"><div class="t">🗣 說漢語</div><div class="goal">朝廷禁胡語、<b>改說漢語</b>。</div></div>
+      <div class="up"><div class="t">👗 改漢姓、穿漢服</div><div class="goal">皇族帶頭把胡姓<b>改成漢姓</b>。</div></div>
+      <div class="up"><div class="t">💍 胡漢通婚</div><div class="goal">鼓勵通婚，加速<b>民族融合</b>。</div></div>
+    </div>
+
+    <div class="box teacher">
+      <div class="bh">👨‍🏫 老師吐槽</div>
+      <p>很多人以為漢化就是「漢族把胡人同化掉」，這是<strong>單向</strong>的想法，會被素養題電到。</p>
+      <p>正確的是<strong>雙向融合</strong>：胡人學漢制、漢人也吸收了游牧民族的服飾、飲食、音樂、騎射。這一整鍋攪在一起，才養出後面隋唐那個「氣度超大、超級國際化」的盛世。👉 記住：這叫<strong>融合</strong>，不是誰吃掉誰。</p>
+    </div>
+
+    <!-- 文化 -->
+    <h3 class="block">🛕 大事三：佛教興盛（亂世裡的心靈寄託）</h3>
+    <p>亂世裡人心不安，佛教剛好給了答案，於是快速流行。最直接的證據，就是那些到今天還在的<strong>大型石窟</strong>：</p>
+    <div class="chips">
+      <span class="c"><b>雲岡石窟</b>山西</span>
+      <span class="c"><b>龍門石窟</b>洛陽</span>
+      <span class="c"><b>大量佛像</b>藝術成就高</span>
+    </div>
+    <p>所以史料題只要提到「這時期開鑿大量石窟、雕刻佛像」，你就知道背後是<strong>佛教興盛</strong>。</p>
+
+    <!-- 核心問題回收 -->
+    <div class="box detect" style="background:var(--red-soft);border-color:var(--red)">
+      <div class="bh" style="color:var(--red)">💡 回收本章大哉問</div>
+      <p style="font-weight:700;font-size:16px;font-family:var(--serif)">「中國分裂了，為什麼反而帶來新文化？」</p>
+      <p>因為分裂 → 人口大遷徙 → 不同民族被迫住在一起 → 融合 → 再加上佛教傳入，文化反而變得更多元。<strong>亂，逼出了交流。</strong></p>
+    </div>
+
+    <!-- 考題偵測器 -->
+    <h3 class="block">🔥 考題偵測器：看到這種題，你要想到什麼</h3>
+    <div class="box detect">
+      <div class="bh">🔎 關鍵字 → 反射動作</div>
+      <p>📌 題目說「大量人口由北方往南方遷移，帶動當地開發」<br>→ 想到 <strong>魏晉南北朝 → 江南開發 → 經濟重心南移（開始）</strong>。</p>
+      <p>📌 題目說「某北方政權主動遷都、改漢姓、說漢語、鼓勵通婚」<br>→ 想到 <strong>北魏孝文帝的漢化改革 → 民族融合</strong>。</p>
+      <p>📌 題目說「此時期開鑿大量石窟、雕造佛像」<br>→ 想到 <strong>佛教興盛</strong>（雲岡、龍門）。</p>
+      <p>📌 題目問經濟重心南移是「開始」還是「完成」<br>→ <strong>開始＝魏晉南北朝，完成＝南宋</strong>，看清楚再選。</p>
+    </div>
+
+    <!-- 原創題 -->
+    <h3 class="block">📝 原創練習題（點選項作答）</h3>
+    <p class="gps-note">全部原創，練的是「看到新題也會做」，不是背題庫。作答後會出現解析。</p>
+    <div id="quizzes2"></div>
+
+  </section>
+
+  <!-- ================= 第三章 ================= -->
+  <section id="ch3">
+    <div class="lead-chap">
+      <div class="cn">第三章</div>
+      <h2>隋唐：歷史的「大型升級包」</h2>
+      <p>第二章那鍋民族大融合，養出了唐朝超大的氣度。這一章可以想成一款遊戲更新：<strong>隋負責把系統建起來，唐負責把系統玩到高峰</strong>。</p>
+    </div>
+
+    <!-- 故事開場 -->
+    <h3 class="block">🎬 故事開場：亂了 400 年，終於有人按下重開機</h3>
+    <p>南北朝分裂太久，大家都受不了了。這時<strong>隋</strong>再次統一天下，並且一口氣裝了好幾個「新系統」；接著<strong>唐</strong>接手，把這些系統全部升到滿級。先看這條主線——</p>
+    <div class="flow">
+      <div class="node red">南北朝 · 長期分裂</div><div class="down">↓</div>
+      <div class="node">隋 · 再次統一，建立新制度</div><div class="down">↓</div>
+      <div class="node">唐 · 承接並發揚，走向盛世</div><div class="down">↓</div>
+      <div class="node red">貞觀之治 → 開元之治</div>
+    </div>
+
+    <!-- RPG 升級表 -->
+    <h3 class="block">🎮 隋唐系統升級表</h3>
+    <p>這章的重點，就是這六個系統。看清楚每個是「隋建立」還是「唐發揚」：</p>
+    <div class="upgrade">
+      <div class="up"><div class="t">🏛 政治｜三省六部</div><div class="goal"><b>唐</b>發揚：中央分三省分工制衡，行政更有效率。</div></div>
+      <div class="up"><div class="t">📝 選官｜科舉</div><div class="goal"><b>隋</b>建立、<b>唐</b>完備：靠考試取才，不再只看門第。</div></div>
+      <div class="up"><div class="t">🚢 交通｜大運河</div><div class="goal"><b>隋</b>建立：連通南北，便利漕運與經濟交流。</div></div>
+      <div class="up"><div class="t">🌏 對外｜東亞交流</div><div class="goal"><b>唐</b>高峰：遣唐使、玄奘取經，長安超國際化。</div></div>
+      <div class="up"><div class="t">🎨 文化｜唐文化</div><div class="goal"><b>唐</b>高峰：唐詩、藝術繁盛，影響東亞各國。</div></div>
+      <div class="up"><div class="t">💰 經濟｜農商發展</div><div class="goal"><b>唐</b>高峰：農業、商業與城市同步繁榮。</div></div>
+    </div>
+
+    <div class="box mem">
+      <div class="bh">🧠 一句話記隋唐關係</div>
+      <p class="punch">隋建立系統，唐把系統玩到高峰。</p>
+      <p>看到「制度是誰開創的」先想<strong>隋</strong>；看到「盛世、國際化、發揚光大」先想<strong>唐</strong>。</p>
+    </div>
+
+    <!-- 科舉 -->
+    <h3 class="block">📝 重點一：科舉——出身不再決定一切</h3>
+    <p>第二章講過，魏晉南北朝做官要看<strong>門第（士族）</strong>，出身不好就沒機會。隋朝改了規則：</p>
+    <div class="flow">
+      <div class="node">過去 · 看門第出身當官</div><div class="down">↓</div>
+      <div class="node red">隋 · 開創科舉，靠「考試」取才</div><div class="down">↓</div>
+      <div class="node">唐 · 制度完備，讀書人有了向上的路</div>
+    </div>
+    <div class="box trap">
+      <div class="bh">⚠️ 會考陷阱：科舉是「隋」開創的</div>
+      <p><span class="no">科舉是唐朝發明的</span>（❌ 很多人這樣記）</p>
+      <p><span class="yes">科舉起於隋、完備於唐</span>（✓ 隋文帝分科取才、隋煬帝設進士科）</p>
+      <p style="margin-top:8px">👉 題目問「科舉制度<strong>開始</strong>於哪一朝」→ 答<strong>隋</strong>，別反射性選唐。</p>
+    </div>
+
+    <!-- 大運河 -->
+    <h3 class="block">🚢 重點二：大運河——被罵慘卻超好用的工程</h3>
+    <p>隋煬帝開大運河，把南北連起來，這條「古代高速公路」讓南方的糧食、物產能運到北方：</p>
+    <div class="flow">
+      <div class="node red">隋煬帝 · 開大運河</div><div class="down">↓</div>
+      <div class="node">南北交通打通</div><div class="down">↓</div>
+      <div class="node">經濟、物資交流大增</div><div class="down">↓</div>
+      <div class="node blue">長期促進唐宋經濟發展</div>
+    </div>
+    <div class="box mem">
+      <div class="bh">🧠 大運河一句話</div>
+      <p class="punch">隋朝開高速公路，唐朝把它開成盛世。</p>
+    </div>
+
+    <div class="box teacher">
+      <div class="bh">👨‍🏫 老師吐槽</div>
+      <p>楊廣（隋煬帝）常被課本一句「暴君」帶過，但這太偷懶了。他大興工程、對外用兵確實造成<strong>沉重民力負擔</strong>，這是隋很快滅亡的原因之一；</p>
+      <p>可是大運河本身<strong>後來長期發揮巨大作用</strong>，唐宋的經濟繁榮都靠它。👉 這就是會考最愛玩的：<strong>人物評價 ≠ 歷史結果</strong>。一個人可以「評價不好」，他做的事卻「影響深遠」。</p>
+    </div>
+
+    <div class="box trap">
+      <div class="bh">⚠️ 會考陷阱：大運河的「影響」不要選成隋亡</div>
+      <p>題目若問<strong>大運河的影響／作用</strong>，正解是<span class="yes">促進南北交通與經濟交流</span>（長期正面）。</p>
+      <p>看到「楊廣」兩個字就直接選<span class="no">造成隋朝滅亡</span>——這是陷阱。隋亡的主因是<strong>整體民力負擔過重</strong>，不等於「大運河的影響」。</p>
+    </div>
+
+    <!-- 唐的國際化 -->
+    <h3 class="block">🌏 重點三：唐朝為什麼這麼「國際」？</h3>
+    <p>還記得第二章的民族大融合嗎？那一整鍋胡漢交融，養出了唐朝<strong>超級開放的氣度</strong>。首都長安是當時世界級的國際大都市：</p>
+    <div class="chips">
+      <span class="c"><b>遣唐使</b>日本派人來學</span>
+      <span class="c"><b>玄奘</b>西行取經</span>
+      <span class="c"><b>長安</b>各國商旅雲集</span>
+      <span class="c"><b>唐文化</b>外傳東亞</span>
+    </div>
+    <div class="box detect" style="background:var(--red-soft);border-color:var(--red)">
+      <div class="bh" style="color:var(--red)">💡 前後章串起來</div>
+      <p><strong>南北朝民族融合</strong>（第二章）→ 唐朝氣度開放 → <strong>東亞國際交流高峰</strong>（本章）。歷史是連著的，不是一段一段。</p>
+    </div>
+
+    <!-- 考題偵測器 -->
+    <h3 class="block">🔥 考題偵測器：看到這種題，你要想到什麼</h3>
+    <div class="box detect">
+      <div class="bh">🔎 關鍵字 → 反射動作</div>
+      <p>📌 題目說「某制度讓人民透過考試取得做官資格」<br>→ 想到 <strong>科舉（起於隋、完備於唐）</strong>。問「開始」就選隋。</p>
+      <p>📌 題目說「連接南北的人工水道，便利漕運與經濟交流」<br>→ 想到 <strong>大運河（隋煬帝）</strong>。問影響＝促進交流，不是隋亡。</p>
+      <p>📌 題目說「中央分為三個部門分工、彼此制衡」<br>→ 想到 <strong>三省六部（唐）</strong>。</p>
+      <p>📌 題目說「大量外國使節、留學生來到首都學習」<br>→ 想到 <strong>唐朝長安 · 東亞交流</strong>。</p>
+    </div>
+
+    <!-- 原創題 -->
+    <h3 class="block">📝 原創練習題（點選項作答）</h3>
+    <p class="gps-note">全部原創，練的是「看到新題也會做」，不是背題庫。作答後會出現解析。</p>
+    <div id="quizzes3"></div>
+
+  </section>
+
+  <!-- ================= 第四章 ================= -->
+  <section id="ch4">
+    <div class="lead-chap">
+      <div class="cn">第四章</div>
+      <h2>宋：軍事不強，經濟文化為什麼超強？</h2>
+      <p>唐朝之後，宋朝打仗常常吃虧，旁邊一直有遼、西夏、金在壓。可是——它的經濟、科技、文化卻是中國歷史數一數二的高峰。這一章要破解這個<strong>反差</strong>。</p>
+    </div>
+
+    <!-- 故事開場 -->
+    <h3 class="block">🎬 故事開場：一個「怕武將」的王朝</h3>
+    <p>宋朝的開國皇帝趙匡胤，自己就是靠帶兵奪權上位的。所以他當上皇帝後最怕什麼？<strong>怕別的武將也這樣搞他</strong>。於是他定下一個大方向：</p>
+    <div class="talk"><div class="who">👑</div><div class="say"><b>宋太祖</b>「與其讓武將坐大，不如讓讀書人來治國。」</div></div>
+    <p>這個決定，就是宋朝一切的源頭——<strong>重文輕武</strong>。它同時解釋了宋朝的「強」和「弱」：</p>
+    <div class="flow">
+      <div class="node red">宋 · 重文輕武</div><div class="down">↓</div>
+      <div class="node">文官地位提高、科舉大擴充</div><div class="down">↓</div>
+      <div class="split">
+        <div class="node blue">科技、文化蓬勃</div>
+        <div class="node blue">商業繁榮、城市興盛</div>
+      </div>
+      <div class="down">↓</div>
+      <div class="node red">經濟文化高峰（但軍事偏弱、外患多）</div>
+    </div>
+
+    <div class="box mem">
+      <div class="bh">🧠 這章的核心反差</div>
+      <p class="punch">一個國家的「強」，不一定只有軍事。</p>
+      <p>宋朝軍事不亮眼，但把<strong>科技、商業、文化、城市</strong>全部點滿。看到「軍事弱卻很富庶繁榮」，第一個想到<strong>宋</strong>。</p>
+    </div>
+
+    <!-- 三大發明 -->
+    <h3 class="block">💡 重點一：宋朝三寶（三大發明發揚光大）</h3>
+    <p>宋代把三項關鍵技術<strong>推向成熟、廣泛應用</strong>，深深影響了後來的世界：</p>
+    <div class="chips">
+      <span class="c"><b>印刷術</b>活字印刷（畢昇）</span>
+      <span class="c"><b>指南針</b>用於航海</span>
+      <span class="c"><b>火藥</b>用於軍事武器</span>
+    </div>
+    <div class="box trap">
+      <div class="bh">⚠️ 會考陷阱：是「發揚光大」不是「發明」</div>
+      <p><span class="no">印刷術、指南針、火藥是宋朝發明的</span>（❌ 說法不精準）</p>
+      <p><span class="yes">三者在宋代成熟並被廣泛應用</span>（✓ 例如火藥更早就有雛形，宋代才大量用於軍事）</p>
+      <p style="margin-top:8px">👉 題目若寫「宋代<strong>發明</strong>火藥」多半是錯的敘述；正確講法是「宋代<strong>廣泛應用／改良</strong>」。</p>
+    </div>
+
+    <!-- 商業與城市 -->
+    <h3 class="block">🏙 重點二：商業繁榮，城市不夜城</h3>
+    <p>文治帶來安定，經濟就爆發了。宋朝的城市生活熱鬧到什麼程度？看這幾個關鍵字：</p>
+    <div class="upgrade">
+      <div class="up"><div class="t">💵 交子</div><div class="goal"><b>世界最早的紙幣</b>，出現在宋代，代表商業高度發達。</div></div>
+      <div class="up"><div class="t">🌃 夜市 · 坊市合一</div><div class="goal">打破過去「白天定點市集」的限制，<b>城市日夜都在做生意</b>。</div></div>
+      <div class="up"><div class="t">🚢 海上貿易</div><div class="goal">設<b>市舶司</b>管理，瓷器、絲綢大量外銷海外。</div></div>
+      <div class="up"><div class="t">🖼 清明上河圖</div><div class="goal">畫出北宋開封的<b>繁華街市</b>，是最好的史料證據。</div></div>
+    </div>
+    <div class="box mem">
+      <div class="bh">🧠 宋朝繁榮一句話</div>
+      <p class="punch">紙幣、夜市、海上貿易——宋朝是古代的「商業之城」。</p>
+    </div>
+
+    <!-- 經濟重心南移完成 -->
+    <div class="box trap">
+      <div class="bh">⚠️ 會考陷阱：經濟重心南移「完成」在南宋</div>
+      <p>還記得第二章嗎？經濟重心南移<span class="yes">開始於魏晉南北朝</span>，一路發展，到<span class="yes">南宋正式「完成」</span>——南方經濟徹底超越北方。</p>
+      <p style="margin-top:8px">👉 開始＝魏晉南北朝、完成＝南宋。這是跨章一起考的超愛出題點。</p>
+    </div>
+
+    <!-- 老師吐槽 -->
+    <div class="box teacher">
+      <div class="bh">👨‍🏫 老師吐槽</div>
+      <p>很多人看到宋朝「打仗常輸、被迫給遼和西夏歲幣」，就覺得宋很爛。這太片面了。</p>
+      <p>重文輕武是一把<strong>雙面刃</strong>：代價是軍事偏弱、外患不斷；但好處是政治安定、經濟文化衝上巔峰。👉 素養題要你看到<strong>一個政策同時帶來優點和缺點</strong>，不是簡單分「好朝代／壞朝代」。</p>
+    </div>
+
+    <!-- 考題偵測器 -->
+    <h3 class="block">🔥 考題偵測器：看到這種題，你要想到什麼</h3>
+    <div class="box detect">
+      <div class="bh">🔎 關鍵字 → 反射動作</div>
+      <p>📌 題目說「重用文官、壓抑武將，導致軍事偏弱但文化興盛」<br>→ 想到 <strong>宋 · 重文輕武</strong>。</p>
+      <p>📌 題目說「世界上最早出現的紙幣」<br>→ 想到 <strong>交子（宋）</strong>。</p>
+      <p>📌 題目說「城市出現夜市、商業繁榮、坊市界線打破」<br>→ 想到 <strong>宋代城市經濟</strong>。</p>
+      <p>📌 題目說「印刷術／指南針／火藥被廣泛應用」<br>→ 想到 <strong>宋三大發明發揚光大</strong>（不是發明）。</p>
+      <p>📌 題目問經濟重心南移「完成」於何時<br>→ <strong>南宋</strong>（開始才是魏晉南北朝）。</p>
+    </div>
+
+    <!-- 原創題 -->
+    <h3 class="block">📝 原創練習題（點選項作答）</h3>
+    <p class="gps-note">全部原創，練的是「看到新題也會做」，不是背題庫。作答後會出現解析。</p>
+    <div id="quizzes4"></div>
+
+  </section>
+
+  <!-- ================= 第五章 ================= -->
+  <section id="ch5">
+    <div class="lead-chap">
+      <div class="cn">第五章</div>
+      <h2>元：一個「超大地圖」的帝國</h2>
+      <p>宋朝之後，來了一個前所未有的龐然大物。蒙古人打下橫跨歐亞的大帝國，忽必烈建立元朝、統一中國。這一章的重點不是背人名，而是兩個字——<strong>交流</strong>。</p>
+    </div>
+
+    <!-- 故事開場 -->
+    <h3 class="block">🎬 故事開場：地圖大到看不到邊</h3>
+    <p>想像一下：以前的朝代，地圖大概就是「中國這一塊」。但蒙古帝國擴張後，勢力範圍從<strong>東亞一路連到歐洲</strong>。這代表什麼？代表<strong>路，被打通了</strong>。</p>
+    <div class="flow">
+      <div class="node blue">歐洲</div>
+      <div class="down">↕</div>
+      <div class="node red">蒙古 · 元帝國（橫跨歐亞）</div>
+      <div class="down">↕</div>
+      <div class="node blue">中國 · 亞洲</div>
+    </div>
+    <p>忽必烈就是這個中國部分的建立者——</p>
+    <div class="talk"><div class="who">👑</div><div class="say"><b>忽必烈（元世祖）</b>「我不只要中國，我要讓整條歐亞大道都動起來。」</div></div>
+
+    <div class="box mem">
+      <div class="bh">🧠 這章只記兩個字</div>
+      <p class="punch">元 ＝ 交流。</p>
+      <p>地圖變超大 → 東西交通變順 → 各種東西開始跨洲流動。看到「東西交通空前頻繁」，第一個想到<strong>元</strong>。</p>
+    </div>
+
+    <!-- 因果：為何交流大增 -->
+    <h3 class="block">🌐 重點一：為什麼元朝交流特別多？</h3>
+    <p>不是元朝人特別愛社交，而是「地理條件」讓交流變得容易：</p>
+    <div class="flow">
+      <div class="node red">蒙古帝國橫跨歐亞</div><div class="down">↓</div>
+      <div class="node">道路打通、設驛站便利往來</div><div class="down">↓</div>
+      <div class="node">東西交通空前頻繁</div><div class="down">↓</div>
+      <div class="node red">人員 · 商品 · 宗教 · 科技 · 文化 全面交流</div>
+    </div>
+    <p>所以「交流」不是一種，而是<strong>五種一起發生</strong>：</p>
+    <div class="chips">
+      <span class="c"><b>人員</b>各國使節商旅</span>
+      <span class="c"><b>商品</b>東西貨物流通</span>
+      <span class="c"><b>宗教</b>多種宗教傳入</span>
+      <span class="c"><b>科技</b>技術跨洲傳播</span>
+      <span class="c"><b>文化</b>藝術思想交融</span>
+    </div>
+
+    <!-- 馬可波羅 -->
+    <h3 class="block">🧭 重點二：馬可波羅——東西交流的招牌</h3>
+    <p>元朝東西交流最有名的證據，就是這位從歐洲來的旅行家：</p>
+    <div class="box teacher" style="background:var(--blue-soft);border-color:var(--blue)">
+      <div class="bh" style="color:var(--blue)">🧳 馬可波羅來華</div>
+      <p>義大利人馬可波羅沿著暢通的歐亞道路來到中國，回去後留下《馬可波羅遊記》，向歐洲人描述東方的富庶。</p>
+      <p>👉 考題只要提到「一位歐洲旅行家在此時來到中國、記錄見聞」，就是<strong>元朝東西交流</strong>的代表。</p>
+    </div>
+
+    <!-- 行省制度 -->
+    <h3 class="block">🗺 重點三：行省制度（現代「省」的祖先）</h3>
+    <p>帝國那麼大要怎麼管？元朝在地方設<strong>行中書省（行省）</strong>來治理。這個制度影響超級深遠——</p>
+    <div class="flow">
+      <div class="node red">元 · 設行省管理地方</div><div class="down">↓</div>
+      <div class="node blue">「省」這個地方單位一直沿用到今天</div>
+    </div>
+    <div class="box trap">
+      <div class="bh">⚠️ 會考陷阱：行省 ≠ 三省六部</div>
+      <p><span class="yes">行省（元）</span>：管<strong>地方</strong>的制度，是今天「省」的由來。</p>
+      <p><span class="no">三省六部（唐）</span>：是<strong>中央</strong>的行政制度。</p>
+      <p style="margin-top:8px">👉 兩個都有「省」字超容易混。看到「地方、省」想元行省；看到「中央、分工制衡」想唐三省六部。</p>
+    </div>
+
+    <div class="box teacher">
+      <div class="bh">👨‍🏫 老師吐槽</div>
+      <p>課本常要你背「忽必烈＝元世祖」，但這只是名字。真正的考點是他做的<strong>那件大事</strong>：把中國納入一個橫跨歐亞的大系統，讓東西交流達到前所未有的高峰。</p>
+      <p>👉 記人名沒用，記「他打通了歐亞、帶來大交流」才會拿分。而且元朝是中國史上<strong>第一個由少數民族（蒙古）建立的大一統王朝</strong>，這點也常考。</p>
+    </div>
+
+    <!-- 考題偵測器 -->
+    <h3 class="block">🔥 考題偵測器：看到這種題，你要想到什麼</h3>
+    <div class="box detect">
+      <div class="bh">🔎 關鍵字 → 反射動作</div>
+      <p>📌 題目說「帝國橫跨歐亞，東西交通空前頻繁」<br>→ 想到 <strong>元 · 交流</strong>。</p>
+      <p>📌 題目說「一位歐洲旅行家來到中國並記錄見聞」<br>→ 想到 <strong>馬可波羅（元朝東西交流）</strong>。</p>
+      <p>📌 題目說「在地方設『省』來管理廣大疆域」<br>→ 想到 <strong>元 · 行省制度</strong>（不是唐三省六部）。</p>
+      <p>📌 題目說「中國第一個由少數民族建立的大一統王朝」<br>→ 想到 <strong>元（蒙古）</strong>。</p>
+    </div>
+
+    <!-- 原創題 -->
+    <h3 class="block">📝 原創練習題（點選項作答）</h3>
+    <p class="gps-note">全部原創，練的是「看到新題也會做」，不是背題庫。作答後會出現解析。</p>
+    <div id="quizzes5"></div>
+
+  </section>
+
+  <!-- ================= 第六章 ================= -->
+  <section id="ch6">
+    <div class="lead-chap">
+      <div class="cn">第六章</div>
+      <h2>明清：帝國開始「收緊」</h2>
+      <p>元朝之後是明、清。這一章有一條超清楚的主線：<strong>皇帝把權力越抓越緊</strong>。明朝廢丞相、清朝設軍機處，一步一步把「控制器」全部拿回自己手上。</p>
+    </div>
+
+    <!-- 故事開場 -->
+    <h3 class="block">🎬 故事開場：皇帝的心聲</h3>
+    <p>從秦漢到唐宋，皇帝底下一直有個很有權的職位——<strong>丞相</strong>（幫皇帝管理百官）。但皇帝心裡其實一直有個 OS：</p>
+    <div class="talk"><div class="who">👑</div><div class="say"><b>皇帝</b>「丞相權力那麼大……萬一他不聽話怎麼辦？我想把權力全部抓在自己手上。」</div></div>
+    <p>明清兩朝，就是這個念頭一路實現的過程：</p>
+    <div class="flow">
+      <div class="node">明太祖 · 廢丞相</div><div class="down">↓</div>
+      <div class="node">皇帝直接管六部，皇權提高</div><div class="down">↓</div>
+      <div class="node">清 · 設軍機處</div><div class="down">↓</div>
+      <div class="node red">皇權集中到頂峰</div>
+    </div>
+
+    <div class="box mem">
+      <div class="bh">🧠 一句話記明清政治</div>
+      <p class="punch">明清政治：皇帝把「控制器」拿回自己手上。</p>
+      <p>整章的方向只有一個——<strong>權力往皇帝一個人集中</strong>。</p>
+    </div>
+
+    <!-- 明廢丞相 -->
+    <h3 class="block">🏛 重點一：明太祖廢丞相</h3>
+    <p>明太祖朱元璋一上台就做了件大事：<strong>直接把丞相這個職位廢掉</strong>，讓六部（各部門）直接對皇帝負責。中間再也沒有人能分皇帝的權。</p>
+    <div class="flow">
+      <div class="node red">明太祖 · 廢丞相</div><div class="down">↓</div>
+      <div class="node">六部直接聽命於皇帝</div><div class="down">↓</div>
+      <div class="node blue">皇帝權力大幅提高</div>
+    </div>
+
+    <!-- 清軍機處 -->
+    <h3 class="block">🗂 重點二：清朝設軍機處</h3>
+    <p>到了清朝，皇權再往上衝一階。<strong>軍機處</strong>是皇帝身邊的機構，大臣只負責照皇帝的意思辦事、傳達命令——決定權完全在皇帝一人：</p>
+    <div class="flow">
+      <div class="node red">清 · 設軍機處</div><div class="down">↓</div>
+      <div class="node">大臣只是奉命辦事、傳達旨意</div><div class="down">↓</div>
+      <div class="node blue">皇權達到中國歷史頂峰</div>
+    </div>
+
+    <!-- 皇權集中圖 -->
+    <h3 class="block">📈 一圖看懂：權力往上集中</h3>
+    <p>把明清的政治想成一座金字塔，權力一路往<strong>最上面的皇帝</strong>集中：</p>
+    <div class="flow">
+      <div class="node red">👑 皇帝（權力頂點）</div><div class="down">↑</div>
+      <div class="node">中央官僚（聽命辦事）</div><div class="down">↑</div>
+      <div class="node">地方</div>
+    </div>
+
+    <!-- 對外：鄭和 + 收緊鋪墊 -->
+    <h3 class="block">🚢 重點三：明朝的對外——先開放，後收緊</h3>
+    <p>明朝前期其實很有氣魄：<strong>鄭和下西洋</strong>，帶領龐大船隊遠航到東南亞、印度洋一帶，宣揚國威、進行交流。</p>
+    <div class="box teacher" style="background:var(--blue-soft);border-color:var(--blue)">
+      <div class="bh" style="color:var(--blue)">⛵ 鄭和下西洋</div>
+      <p>明成祖時期，鄭和率領當時世界上規模最大的船隊多次遠航，是中國古代航海的高峰。</p>
+      <p>👉 考題提到「龐大船隊、遠航海外、宣揚國威」就是<strong>鄭和（明）</strong>。</p>
+    </div>
+    <p>但明清整體趨勢，是慢慢從「開放」轉向「保守、限制對外往來」。這一「收緊」，剛好替下一章埋下伏筆——當西方帶著船堅炮利來敲門時，中國正好處在最封閉的狀態。</p>
+    <div class="box detect" style="background:var(--warn-soft);border-color:var(--warn)">
+      <div class="bh" style="color:var(--warn)">🔗 接下一章</div>
+      <p>明清「向內收緊 ＋ 對外保守」＋ 清朝正逢帝國高峰而自滿 → 第七章<strong>「西方衝擊、被迫開門」</strong>就從這裡開始。</p>
+    </div>
+
+    <!-- 老師吐槽 -->
+    <div class="box teacher">
+      <div class="bh">👨‍🏫 老師吐槽</div>
+      <p>明朝廢了丞相，但皇帝一個人真的忙得完嗎？當然不行，所以後來出現「內閣」來幫忙。但<strong>內閣不是丞相</strong>——它只是協助皇帝的祕書團隊，沒有丞相那種獨立大權。</p>
+      <p>👉 如果題目說「明朝內閣＝恢復丞相制度」，那是<strong>錯的</strong>。明清的大方向始終是「削弱臣權、集中皇權」，不會走回頭路。</p>
+    </div>
+
+    <!-- 考題偵測器 -->
+    <h3 class="block">🔥 考題偵測器：看到這種題，你要想到什麼</h3>
+    <div class="box detect">
+      <div class="bh">🔎 關鍵字 → 反射動作</div>
+      <p>📌 題目說「廢除丞相，六部直接向皇帝負責」<br>→ 想到 <strong>明太祖 → 皇權提高</strong>。</p>
+      <p>📌 題目說「設一機構，大臣僅奉命辦事，皇權達到頂峰」<br>→ 想到 <strong>清 · 軍機處</strong>。</p>
+      <p>📌 題目說「率龐大船隊遠航海外、宣揚國威」<br>→ 想到 <strong>鄭和下西洋（明）</strong>。</p>
+      <p>📌 題目呈現「皇帝權力一步步集中」的趨勢<br>→ 想到 <strong>明清皇權集中</strong>。</p>
+    </div>
+
+    <!-- 原創題 -->
+    <h3 class="block">📝 原創練習題（點選項作答）</h3>
+    <p class="gps-note">全部原創，練的是「看到新題也會做」，不是背題庫。作答後會出現解析。</p>
+    <div id="quizzes6"></div>
+
+  </section>
+
+  <!-- ================= 第七章 ================= -->
+  <section id="ch7">
+    <div class="lead-chap">
+      <div class="cn">第七章 · 壓軸</div>
+      <h2>近代中國：一連串「被迫開門」</h2>
+      <p>這是整套講義最重要、也最多人背到崩潰的一章。鴉片戰爭、南京條約、英法聯軍、甲午、八國聯軍……如果你把它們當成五件事去背，一定會爆。這章要教你把它們看成<strong>一條線</strong>。</p>
+    </div>
+
+    <!-- 故事開場 -->
+    <h3 class="block">🎬 故事開場：一扇一直被撞的大門</h3>
+    <p>清朝原本把大門關得緊緊的（記得第六章的「收緊」嗎？）。但西方列強帶著船堅炮利來了，一次又一次地撞這扇門。每撞開一次，中國就被迫簽下更不利的條約、失去更多。</p>
+    <div class="talk"><div class="who">🚪</div><div class="say"><b>清朝的大門</b>「碰！……碰！……又來？……碰！」</div></div>
+    <div class="box mem">
+      <div class="bh">🧠 這章的一句話</div>
+      <p class="punch">這不是 5 個獨立事件，是「外國勢力一步步加深」的同一條故事線。</p>
+      <p>每一回合都是同一套劇本：<strong>打一場敗仗 → 簽一個不平等條約 → 列強要得更多 → 再打下一場</strong>。</p>
+    </div>
+
+    <!-- 戰爭→條約 配對鏈 -->
+    <h3 class="block">🚪 核心圖：大門被撞開的四回合</h3>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin:0 0 14px;font-size:13px;color:var(--ink-soft)">
+      <span style="display:inline-flex;align-items:center;gap:6px"><span style="width:14px;height:14px;border-radius:4px;background:var(--red);display:inline-block"></span>⚔️ 戰爭</span>
+      <span style="display:inline-flex;align-items:center;gap:6px"><span style="width:14px;height:14px;border-radius:4px;background:var(--blue-soft);border:1px solid var(--blue);display:inline-block"></span>📜 條約（結果）</span>
+    </div>
+    <div class="flow">
+      <div class="node">清 · 對外門戶漸開，列強勢力進入</div><div class="down">↓</div>
+      <div class="node red">⚔️ 第一次鴉片戰爭</div><div class="down">↓</div>
+      <div class="node blue">📜 南京條約：五口通商 · 割香港島 · 賠款</div><div class="down">↓</div>
+      <div class="node red">⚔️ 英法聯軍（第二次鴉片戰爭）</div><div class="down">↓</div>
+      <div class="node blue">📜 更多不平等條約：增開口岸 · 賠款</div><div class="down">↓</div>
+      <div class="node red">⚔️ 甲午戰爭（對日本）</div><div class="down">↓</div>
+      <div class="node blue">📜 馬關條約：割台灣、澎湖 · 鉅額賠款</div><div class="down">↓</div>
+      <div class="node red">⚔️ 八國聯軍</div><div class="down">↓</div>
+      <div class="node blue">📜 辛丑條約：鉅額賠款 · 列強勢力更深</div>
+    </div>
+
+    <!-- 配對表 -->
+    <h3 class="block">🎯 戰爭 × 條約，一定要配對正確</h3>
+    <p>會考最愛玩「張冠李戴」——把戰爭配錯條約。這四組黃金配對背熟就贏一半：</p>
+    <div class="upgrade">
+      <div class="up" style="border-left-color:var(--red)"><div class="t">⚔️ 鴉片戰爭 → 📜 南京條約</div><div class="goal">重點：五口通商、<b>割香港島</b>、賠款。中國近代不平等條約的<b>起點</b>。</div></div>
+      <div class="up" style="border-left-color:var(--red)"><div class="t">⚔️ 英法聯軍 → 📜 更多條約</div><div class="goal">重點：列強<b>要得更多</b>，增開口岸、擴大權益。</div></div>
+      <div class="up" style="border-left-color:var(--red)"><div class="t">⚔️ 甲午戰爭 → 📜 馬關條約</div><div class="goal">重點：敗給<b>日本</b>，<b>割讓台灣、澎湖</b>，賠款鉅額。</div></div>
+      <div class="up" style="border-left-color:var(--red)"><div class="t">⚔️ 八國聯軍 → 📜 辛丑條約</div><div class="goal">重點：<b>鉅額賠款</b>，列強在華勢力達到最深。</div></div>
+    </div>
+
+    <!-- 台灣特別框 -->
+    <div class="box trap">
+      <div class="bh">🇹🇼 台灣人一定要記：馬關條約</div>
+      <p><strong>甲午戰爭 → 馬關條約 → 台灣、澎湖割讓給日本</strong>。這就是台灣進入「日本殖民時期」的開端，跟你國一學的台灣史直接接上。</p>
+      <p style="margin-top:8px">👉 別把「割香港島」（鴉片戰爭·南京條約）跟「割台灣」（甲午·馬關條約）搞混，這是超高頻陷阱。</p>
+    </div>
+
+    <!-- 老師吐槽 -->
+    <div class="box teacher">
+      <div class="bh">👨‍🏫 老師吐槽</div>
+      <p>我知道你很想把「鴉片、南京、英法、甲午、八國」硬背成一串。但你真正該記的不是<strong>順序</strong>，而是背後那條邏輯：</p>
+      <p><strong>清朝越弱 → 列強越敢要 → 條約越來越苛 → 中國失去越來越多。</strong>只要抓住「一步步加深」這條線，就算題目換個講法、給你一段沒看過的史料，你也推得出來這是哪個階段。👉 素養題考的就是這個「懂脈絡」，不是背年代。</p>
+    </div>
+
+    <!-- 會考陷阱 -->
+    <div class="box trap">
+      <div class="bh">⚠️ 會考三大高頻陷阱</div>
+      <p>① <strong>條約配戰爭</strong>：南京↔鴉片、馬關↔甲午，別配錯。</p>
+      <p>② <strong>割地對象</strong>：割香港島（給英國）≠ 割台灣澎湖（給日本）。</p>
+      <p>③ 看到不平等條約，先問<span class="yes">「這是哪一場戰爭的結果？」</span>再判斷，不要看到「外國人」就亂選。</p>
+    </div>
+
+    <!-- 考題偵測器 -->
+    <h3 class="block">🔥 考題偵測器：看到這種題，你要想到什麼</h3>
+    <div class="box detect">
+      <div class="bh">🔎 關鍵字 → 反射動作</div>
+      <p>📌 題目說「開放五口通商、割香港島、賠款」<br>→ 想到 <strong>南京條約 ← 鴉片戰爭</strong>。</p>
+      <p>📌 題目說「割讓台灣、澎湖給日本」<br>→ 想到 <strong>馬關條約 ← 甲午戰爭</strong>。</p>
+      <p>📌 題目說「多國聯軍攻入、簽訂鉅額賠款條約」<br>→ 想到 <strong>八國聯軍 → 辛丑條約</strong>。</p>
+      <p>📌 題目給一段沒看過的史料，問「反映什麼趨勢」<br>→ 想到 <strong>列強勢力逐步加深、清朝內外壓力增加</strong>。</p>
+    </div>
+
+    <!-- 原創題 -->
+    <h3 class="block">📝 原創練習題（點選項作答）</h3>
+    <p class="gps-note">全部原創，練的是「看到新題也會做」，不是背題庫。作答後會出現解析。</p>
+    <div id="quizzes7"></div>
+
+    <!-- 全書收尾 -->
+    <div class="box mem" style="margin-top:26px">
+      <div class="bh">🎓 七章讀完，回到骨架</div>
+      <p>恭喜你走完整條中國史主線。最後再念一次這條「歷史骨架」，全部就串起來了：</p>
+      <p class="punch" style="font-size:clamp(16px,3.6vw,20px)">統一 → 分裂 → 再統一 → 盛世 → 經濟南移 → 多元交流 → 皇權集中 → 西方衝擊</p>
+      <p>秦漢統一 → 魏晉南北朝分裂 → 隋唐再統一盛世 → 宋經濟文化高峰 → 元多元交流 → 明清皇權集中 → 近代西方衝擊。回到最上面的「朝代 GPS」再對一次，你會發現每一格都住著一個你已經懂的故事了。</p>
+    </div>
+
+  </section>
+
+  <footer>
+    <p class="disc">本講義為原創教學設計，不抄錄歷屆會考或學校試卷；題目均依公開試題的<b>題型與考點</b>重新設計。內容以翰林／康軒／南一三版本共同核心為準，實際授課請對照學生使用版本。</p>
+    <p>《八年級歷史：不用死背的中國史》· 第一章 完整成品 · 其餘章節製作中</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* 主題切換 */
+  var root=document.documentElement, tb=document.getElementById('theme');
+  function cur(){var t=root.getAttribute('data-theme');
+    if(t)return t;
+    return matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+  try{var s=localStorage.getItem('hg-theme'); if(s)root.setAttribute('data-theme',s);}catch(e){}
+  tb.addEventListener('click',function(){
+    var n=cur()==='dark'?'light':'dark';
+    root.setAttribute('data-theme',n);
+    try{localStorage.setItem('hg-theme',n);}catch(e){}
+  });
+
+  /* 朝代 GPS 資料 */
+  var dyn=[
+    {n:'秦',tag:'統一',d:'第一次大一統，統一制度（文字/貨幣/度量衡/郡縣制）。'},
+    {n:'漢',tag:'帝國擴張',d:'把制度養大：皇權、官僚、尊儒、絲路。'},
+    {n:'三國',tag:'分裂',d:'東漢末年天下大亂，魏蜀吳鼎立。'},
+    {n:'南北朝',tag:'民族交流',d:'人口南移、江南開發、多元文化交融。'},
+    {n:'隋',tag:'再統一',d:'再度統一，建科舉、開大運河（建系統）。'},
+    {n:'唐',tag:'盛世',d:'三省六部、對外交流，把系統玩到高峰。'},
+    {n:'宋',tag:'經濟文化',d:'重文輕武，三大發明發揚、商業城市興盛。'},
+    {n:'元',tag:'東西交流',d:'蒙古大帝國，東西交通空前頻繁。'},
+    {n:'明',tag:'皇權集中',d:'廢丞相，皇帝把權力抓得更緊。'},
+    {n:'清',tag:'高峰→外患',d:'設軍機處皇權極盛，晚期遭遇西方衝擊。'},
+    {n:'近代',tag:'西方衝擊',d:'一連串被迫開門：戰爭→不平等條約。'}
+  ];
+  var g=document.getElementById('gpsgrid');
+  g.innerHTML=dyn.map(function(x,i){
+    return '<div class="dyn"><div class="n">'+x.n+
+      '<span class="tag">'+x.tag+'</span></div><div class="d">'+x.d+'</div></div>';
+  }).join('');
+  g.addEventListener('click',function(e){
+    var c=e.target.closest('.dyn'); if(!c)return;
+    c.classList.toggle('on');
+  });
+
+  /* 原創題 */
+  var LAB=['A','B','C','D'];
+  function mountQuiz(id, arr){
+    var box=document.getElementById(id); if(!box)return;
+    box.innerHTML=arr.map(function(q,qi){
+      var opts=q.opts.map(function(o,oi){
+        return '<li data-o="'+oi+'"><span class="lab">'+LAB[oi]+'</span>'+o+'</li>';
+      }).join('');
+      return '<div class="quiz"><span class="qn">第 '+(qi+1)+' 題</span>'+
+        '<span class="qtype">'+q.type+'</span>'+
+        '<div class="stem">'+q.stem+'</div>'+
+        '<ul class="opts" data-ans="'+q.ans+'">'+opts+'</ul>'+
+        '<div class="exp" hidden><b>解析：</b>'+q.exp+'</div></div>';
+    }).join('');
+    box.addEventListener('click',function(e){
+      var li=e.target.closest('li[data-o]'); if(!li)return;
+      var ul=li.parentNode; if(ul.dataset.done)return;
+      ul.dataset.done='1';
+      var ans=+ul.dataset.ans, oi=+li.dataset.o;
+      [].forEach.call(ul.children,function(c){
+        c.classList.add('locked');
+        var i=+c.dataset.o;
+        if(i===ans)c.classList.add('correct');
+        else if(i===oi)c.classList.add('wrong');
+      });
+      var exp=ul.parentNode.querySelector('.exp');
+      if(exp)exp.hidden=false;
+    });
+  }
+
+  var qs1=[
+    {type:'因果題',
+     stem:'某政權統一天下後，大興土木、對外用兵、徭役繁重，十餘年間人民不堪負荷群起反抗，政權迅速瓦解。下列何者最能解釋此政權「速亡」？',
+     opts:['統治者個人殘暴，天生就是壞人','推行的政策造成沉重社會負擔，引發民眾反抗','外族大舉入侵，一舉滅國','皇帝早逝，沒有繼承人'],
+     ans:1,
+     exp:'這題就是秦。素養題要的是<b>因果關聯</b>——政策 → 社會負擔 → 反抗 → 崩潰，而不是「暴君」這種人物評價。看到「速亡＋負擔＋反抗」就選政策因素。'},
+    {type:'制度題',
+     stem:'漢武帝下令諸侯王必須將封地分封給「所有子弟」，而非僅由嫡長子繼承。此政策最主要的效果是？',
+     opts:['增加諸侯王的收入','使諸侯封地越分越小，勢力自然削弱','讓地方更難管理','鼓勵人民多生子女'],
+     ans:1,
+     exp:'這是<b>推恩令</b>。高明處在於不硬收地，而是靠「分給所有兒子 → 越分越小」讓地方勢力自己散掉。關鍵字：分封子弟、削弱諸侯。'},
+    {type:'史料題',
+     stem:'「（此人）通西域，開通往來之道，此後中國與西域之間，使者、商旅往來不絕。」文中「此人」的行動，最直接促成下列何者？',
+     opts:['佛教傳入並成為國教','絲路的開通與東西交流增加','科舉制度的建立','大運河的修築'],
+     ans:1,
+     exp:'「通西域」就是<b>張騫</b>。他的出使讓漢朝與西域交流大增，直接連到<b>絲路發展</b>。注意：科舉是隋、大運河是隋，別看到「交流」就亂配。'},
+    {type:'比較題',
+     stem:'關於「秦」與「漢」在中國歷史上的角色，下列敘述何者最貼切？',
+     opts:['秦與漢都只是短命王朝，影響不大','秦建立大一統的制度，漢則將制度延續並發展成穩固的帝國','漢建立制度，秦加以推翻','兩者的制度完全沒有關聯'],
+     ans:1,
+     exp:'骨架記法：<b>秦建立制度、漢把制度養大</b>。漢承秦制再加上尊儒、絲路、對外擴張，帝國才真正穩下來。'},
+    {type:'情境題',
+     stem:'假設你是漢武帝的顧問，皇帝問你：「如何在不引發諸侯武力反抗的情況下，削弱他們的勢力？」下列建議最符合當時實際採行做法的是？',
+     opts:['直接派兵沒收所有諸侯封地','下令諸侯把封地分封給每一個子弟','把諸侯全部遷到邊疆','取消所有封國，一律改郡縣'],
+     ans:1,
+     exp:'實際採行的就是<b>推恩令</b>——用「看似恩惠、實則分化」的方式，避免正面衝突又達到削藩目的。直接沒收（A）容易逼反，正是它想避免的。'}
+  ];
+
+  var qs2=[
+    {type:'情境題',
+     stem:'魏晉南北朝時期，北方因長期戰亂，大量人口往南方遷移。這波遷徙對江南地區最直接的影響是？',
+     opts:['江南人口減少，土地荒廢','帶來人力與技術，促進江南開發','使江南爆發大規模戰爭','讓江南從此脫離中國'],
+     ans:1,
+     exp:'北方人南遷帶來<b>人力與農耕技術</b>，江南被大幅開發，這正是<b>經濟重心南移的起點</b>。記憶句：人往南，錢也跟著南。'},
+    {type:'陷阱題',
+     stem:'關於中國「經濟重心南移」，下列敘述何者正確？',
+     opts:['開始於魏晉南北朝，完成於南宋','開始於南宋，完成於元朝','開始與完成都在唐朝','秦朝就已經完成'],
+     ans:0,
+     exp:'這是最愛考的陷阱！<b>開始＝魏晉南北朝</b>（北方人南遷、江南開發），<b>完成＝南宋</b>。題目問「開始」還是「完成」，答案完全不同，看清楚再選。'},
+    {type:'制度題',
+     stem:'某北方政權的君主主動下令：遷都洛陽、改說漢語、把胡姓改為漢姓、鼓勵胡漢通婚。這位君主與其政策最可能是？',
+     opts:['秦始皇的統一政策','漢武帝的推恩令','北魏孝文帝的漢化改革','唐太宗的科舉制度'],
+     ans:2,
+     exp:'遷都洛陽＋改漢姓＋說漢語＋通婚，就是<b>北魏孝文帝的漢化改革</b>，目的是加速<b>民族融合</b>。'},
+    {type:'概念題',
+     stem:'課本說魏晉南北朝雖然政治分裂，卻是文化多元、民族融合的重要時期。下列何者最能解釋這個「分裂卻多元」的現象？',
+     opts:['分裂使各政權完全鎖國，各自發展','人口大遷徙讓不同民族被迫共同生活，加上佛教傳入，促成融合與交流','因為沒有戰爭，社會非常安定','因為朝廷嚴格禁止各民族往來'],
+     ans:1,
+     exp:'關鍵在於<b>分裂 → 人口遷徙 → 民族被迫共處 → 融合</b>，再加上佛教興盛，文化反而更多元。分裂逼出了交流，不是停滯。'},
+    {type:'史料題',
+     stem:'「此時期於山西、洛陽一帶開鑿大型石窟，雕造無數佛像，規模宏大、藝術精美。」這段敘述最能反映當時哪一種現象？',
+     opts:['儒家思想成為唯一信仰','佛教興盛，深入社會','道教被政府全面禁止','基督教傳入中國'],
+     ans:1,
+     exp:'大量石窟與佛像（雲岡、龍門）是<b>佛教興盛</b>的直接證據。亂世中人心不安，佛教提供心靈寄託而快速流行。'}
+  ];
+
+  var qs3=[
+    {type:'制度題',
+     stem:'某制度打破了過去「以門第出身決定做官資格」的做法，改由人民透過考試取得任官機會。此制度最早開始於哪一朝？',
+     opts:['漢朝','魏晉南北朝','隋朝','宋朝'],
+     ans:2,
+     exp:'這是<b>科舉</b>，最早開始於<b>隋</b>（隋文帝分科取才、隋煬帝設進士科），唐朝完備。陷阱是誤選唐——唐是完備，不是開創。'},
+    {type:'陷阱題',
+     stem:'題目問：「大運河的開通對後世造成的主要影響為何？」下列何者最恰當？',
+     opts:['直接導致隋朝滅亡','連通南北，促進交通與經濟交流','使北方人口大量減少','讓中國從此不再與外國往來'],
+     ans:1,
+     exp:'問「大運河的影響」，正解是<b>促進南北交通與經濟交流</b>（長期正面）。看到楊廣就選「造成隋亡」是陷阱——隋亡主因是整體民力負擔過重，不等於大運河本身的影響。<b>人物評價 ≠ 歷史結果</b>。'},
+    {type:'制度題',
+     stem:'唐代中央政府分為三個部門，彼此分工又互相牽制，以提高行政效率並避免權力過度集中。這指的是下列何者？',
+     opts:['郡縣制','三省六部','推恩令','軍機處'],
+     ans:1,
+     exp:'這是<b>三省六部</b>（唐發揚）。特徵是「中央分部門、分工又制衡」。軍機處是清、郡縣制是秦、推恩令是漢，別混。'},
+    {type:'比較題',
+     stem:'關於「隋」與「唐」的關係，下列敘述何者最貼切？',
+     opts:['隋建立多項新制度，唐加以承接並發揚，走向盛世','唐建立制度，隋加以推翻','兩者制度完全沒有關聯','隋唐都是短命王朝，沒有留下影響'],
+     ans:0,
+     exp:'骨架記法：<b>隋建立系統、唐把系統玩到高峰</b>。科舉、大運河由隋開創，三省六部、對外交流、文化經濟在唐推向巔峰。'},
+    {type:'概念題',
+     stem:'唐朝首都長安聚集了來自各國的使節、商旅與留學生，日本更派遣「遣唐使」前來學習。下列何者最能解釋唐朝如此開放國際化的背景？',
+     opts:['唐朝嚴格鎖國，禁止對外往來','承接魏晉南北朝以來的民族融合，形成開放包容的氣度','因為唐朝軍事極弱只能對外討好','因為當時沒有其他國家存在'],
+     ans:1,
+     exp:'唐的國際化不是憑空出現——它承接了<b>第二章魏晉南北朝的民族大融合</b>，養出開放包容的氣度，才有長安的國際盛況。歷史是連著的。'}
+  ];
+
+  var qs4=[
+    {type:'概念題',
+     stem:'宋朝對外作戰經常居於弱勢，卻在科技、商業與文化上達到高峰。下列何者最能解釋這個現象？',
+     opts:['宋朝完全放棄國防，把錢全拿去打仗','採重文輕武政策，文官治國帶來安定，經濟文化因而蓬勃','因為周邊完全沒有強敵','因為宋朝軍事其實是各朝最強'],
+     ans:1,
+     exp:'關鍵是<b>重文輕武</b>：代價是軍事偏弱、外患多，好處是政治安定、經濟文化衝上巔峰。看到「軍事弱卻很繁榮」就想到宋。'},
+    {type:'陷阱題',
+     stem:'關於印刷術、指南針、火藥與宋朝的關係，下列敘述何者最精準？',
+     opts:['三者都是宋朝憑空發明的','三者在宋代成熟並被廣泛應用','三者到清朝才出現','三者與宋朝完全無關'],
+     ans:1,
+     exp:'正確講法是<b>在宋代成熟、廣泛應用</b>（例如火藥更早就有雛形，宋代才大量用於軍事）。題目寫「宋朝發明」多半是錯誤敘述，關鍵字是「發揚／廣泛應用」。'},
+    {type:'史料題',
+     stem:'「宋代商業發達，市面上出現了一種可以代替金屬貨幣、便於攜帶交易的紙製憑證。」文中所指最可能是？',
+     opts:['交子','推恩令','市舶司','三省六部'],
+     ans:0,
+     exp:'這是<b>交子</b>，世界上最早的紙幣，出現於宋代，正是商業高度發達的證據。市舶司是管海上貿易的機構，別混。'},
+    {type:'陷阱題',
+     stem:'中國「經濟重心南移」是一個長期過程。關於它的「完成」時間，下列何者正確？',
+     opts:['魏晉南北朝就已完成','完成於南宋','完成於秦朝','完成於唐初'],
+     ans:1,
+     exp:'跨章重點：南移<b>開始於魏晉南北朝</b>（第二章），<b>完成於南宋</b>（本章）。題目問開始或完成，答案不同，看清楚。'},
+    {type:'情境題',
+     stem:'一幅名畫描繪了北宋首都開封街市：商店林立、行人如織、船隻往來運貨，夜晚仍有店家營業。這幅畫最能反映宋代的哪一項特色？',
+     opts:['軍事力量強盛','城市商業繁榮、生活熱鬧','對外完全鎖國','人口大量減少'],
+     ans:1,
+     exp:'這描述的是《清明上河圖》所反映的<b>宋代城市商業繁榮</b>：夜市、坊市合一、商貿興盛。是宋「軍事弱但經濟強」的最佳證據。'}
+  ];
+
+  var qs5=[
+    {type:'概念題',
+     stem:'元朝時期，東西方之間的人員、商品、宗教、科技與文化交流達到前所未有的頻繁。造成這個現象最主要的背景是？',
+     opts:['元朝實施嚴格鎖國政策','蒙古帝國橫跨歐亞，打通了東西交通','當時只有元朝一個國家','因為海上絲路突然中斷'],
+     ans:1,
+     exp:'元朝交流大增的關鍵是<b>蒙古帝國橫跨歐亞、道路打通</b>，東西交通空前順暢。這章只要記兩個字：交流。'},
+    {type:'史料題',
+     stem:'「一位來自義大利的旅行家，沿著暢通的陸路來到中國，停留多年，返鄉後將東方的富庶見聞寫成遊記，轟動歐洲。」這位旅行家與其活動最能代表哪一朝的特色？',
+     opts:['漢朝的絲路','唐朝的遣唐使','元朝的東西交流','宋朝的海上貿易'],
+     ans:2,
+     exp:'這是<b>馬可波羅</b>，元朝東西交流的招牌人物。關鍵字：歐洲旅行家＋來華＋遊記＝元朝。'},
+    {type:'陷阱題',
+     stem:'元朝為了治理廣大的疆域，在地方設置「行省」進行管理，這個制度也成為後世「省」的由來。下列哪一項制度最容易和「行省」混淆，但其實兩者性質不同？',
+     opts:['唐朝的三省六部','秦朝的郡縣制','漢朝的推恩令','宋朝的重文輕武'],
+     ans:0,
+     exp:'最容易混的是<b>唐三省六部</b>——兩個都有「省」字。差別：行省是<b>地方</b>制度（元），三省六部是<b>中央</b>行政制度（唐）。'},
+    {type:'概念題',
+     stem:'關於元朝在中國歷史上的特殊地位，下列敘述何者正確？',
+     opts:['元朝是漢族建立的王朝','元朝是中國第一個由少數民族（蒙古）建立的大一統王朝','元朝從未統一中國','元朝與周邊完全沒有往來'],
+     ans:1,
+     exp:'元朝由蒙古人建立，是<b>中國史上第一個由少數民族建立的大一統王朝</b>，這是常考的特殊地位。'},
+    {type:'情境題',
+     stem:'一名商人從歐洲出發，沿途住在一站接一站的驛站，最後抵達元朝首都大都做生意。這段旅程最能反映元朝的哪一項特色？',
+     opts:['軍事孱弱','交通暢通、東西交流頻繁','經濟蕭條','對外封閉'],
+     ans:1,
+     exp:'沿驛站從歐洲到大都，反映的正是元朝<b>交通暢通、東西交流頻繁</b>。驛站制度讓橫跨歐亞的往來變得可行。'}
+  ];
+
+  var qs6=[
+    {type:'制度題',
+     stem:'某位開國皇帝為了避免大臣分權，直接廢除了丞相一職，改由六部直接向皇帝負責。這位皇帝與其做法最可能是？',
+     opts:['唐太宗設三省六部','明太祖廢丞相','元世祖設行省','漢武帝推恩令'],
+     ans:1,
+     exp:'廢丞相、六部直屬皇帝，就是<b>明太祖</b>的做法，目的是<b>提高皇權</b>。'},
+    {type:'制度題',
+     stem:'清朝設立某一機構，其中大臣主要負責照皇帝的意思辦事、傳達旨意，並沒有實際的決策權，使皇權達到頂峰。這個機構是？',
+     opts:['三省六部','行省','軍機處','內閣（明）'],
+     ans:2,
+     exp:'這是清朝的<b>軍機處</b>，象徵皇權集中到中國歷史頂峰。大臣只是奉命辦事，決定權全在皇帝一人。'},
+    {type:'陷阱題',
+     stem:'下列四種制度，哪一組的「朝代—性質」配對完全正確？',
+     opts:['三省六部（元）、行省（唐）','軍機處（清·皇權頂峰）、廢丞相（明·皇權提高）','行省（明）、軍機處（唐）','廢丞相（清）、三省六部（元）'],
+     ans:1,
+     exp:'正確配對：<b>軍機處＝清（皇權頂峰）、廢丞相＝明（皇權提高）</b>。三省六部是唐（中央）、行省是元（地方），別互相張冠李戴。'},
+    {type:'史料題',
+     stem:'「明朝前期，一支當時世界規模最大的船隊多次遠航至東南亞、印度洋一帶，宣揚國威並進行交流。」這段敘述描述的是？',
+     opts:['張騫通西域','鄭和下西洋','馬可波羅來華','玄奘取經'],
+     ans:1,
+     exp:'龐大船隊＋明朝前期＋遠航海外，就是<b>鄭和下西洋</b>，中國古代航海的高峰。張騫是漢、玄奘是唐、馬可波羅是元。'},
+    {type:'概念題',
+     stem:'綜觀明、清兩朝的政治發展，最主要的趨勢是下列何者？',
+     opts:['皇帝不斷把權力集中到自己手上','丞相權力越來越大','地方勢力凌駕中央','走向君主立憲'],
+     ans:0,
+     exp:'明清的大方向就是<b>皇權不斷集中</b>：明廢丞相、清設軍機處，一路把控制器收回皇帝手上。這是貫穿本章的主線。'}
+  ];
+
+  var qs7=[
+    {type:'配對題',
+     stem:'某條約規定：開放五個港口通商、割讓香港島給英國、並支付巨額賠款。這個條約是哪一場戰爭的結果？',
+     opts:['甲午戰爭','第一次鴉片戰爭','八國聯軍','英法聯軍'],
+     ans:1,
+     exp:'五口通商＋割香港島＋賠款，是<b>南京條約</b>，來自<b>第一次鴉片戰爭</b>，也是中國近代不平等條約的起點。'},
+    {type:'陷阱題',
+     stem:'清朝在一場戰爭中戰敗，被迫將台灣、澎湖割讓給日本。這場戰爭與其後所簽的條約是？',
+     opts:['鴉片戰爭 → 南京條約','甲午戰爭 → 馬關條約','八國聯軍 → 辛丑條約','英法聯軍 → 北京條約'],
+     ans:1,
+     exp:'割讓台灣、澎湖給<b>日本</b>，是<b>甲午戰爭 → 馬關條約</b>。注意別跟「割香港島（鴉片戰爭·南京條約）」搞混，這是最高頻陷阱。'},
+    {type:'史料題',
+     stem:'「多國組成的聯軍攻入首都，事後清廷被迫簽下條約，須支付極為龐大的賠款，列強在華勢力更加深入。」這描述的是？',
+     opts:['第一次鴉片戰爭','甲午戰爭','八國聯軍與辛丑條約','鄭和下西洋'],
+     ans:2,
+     exp:'多國聯軍＋攻入首都＋鉅額賠款，是<b>八國聯軍 → 辛丑條約</b>，列強勢力達到最深的一步。'},
+    {type:'概念題',
+     stem:'課本把鴉片戰爭、英法聯軍、甲午戰爭、八國聯軍放在一起討論。這樣安排最主要想讓學生理解什麼？',
+     opts:['它們是四個彼此無關的獨立事件','它們反映外國勢力逐步加深、清朝壓力不斷增加的一條脈絡','它們都發生在同一年','它們都是中國主動對外發動的戰爭'],
+     ans:1,
+     exp:'重點不是背順序，而是看出<b>「外國勢力一步步加深、清朝內外壓力增加」的同一條故事線</b>。這正是素養題要考的脈絡理解。'},
+    {type:'情境題',
+     stem:'一份沒看過的史料提到：「戰敗之後，朝廷再度被迫開放更多通商口岸、賠款，列強要求也一次比一次更多。」根據本章脈絡，這段話最可能反映的整體趨勢是？',
+     opts:['清朝國力日益強盛','列強勢力逐步加深，中國一步步被迫讓步','中國成功抵禦所有外來勢力','雙方維持平等的往來關係'],
+     ans:1,
+     exp:'關鍵是「一次比一次要得更多、再度被迫讓步」——反映<b>列強勢力逐步加深、中國步步退讓</b>的趨勢。抓住這條線，換成沒看過的史料也能判斷。'}
+  ];
+
+  mountQuiz('quizzes', qs1);
+  mountQuiz('quizzes2', qs2);
+  mountQuiz('quizzes3', qs3);
+  mountQuiz('quizzes4', qs4);
+  mountQuiz('quizzes5', qs5);
+  mountQuiz('quizzes6', qs6);
+  mountQuiz('quizzes7', qs7);
+})();
+</script>
