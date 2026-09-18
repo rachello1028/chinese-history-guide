@@ -17,8 +17,9 @@
     --gold-soft:#fbedc6;
     --teal:#2f8f83;       /* 老師吐槽 */
     --teal-soft:#dcefec;
-    --warn:#d9722e;       /* 會考陷阱 */
+    --warn:#d9722e;       /* 會考陷阱（邊框/強調） */
     --warn-soft:#f8e3d0;
+    --warn-ink:#9c4a15;   /* 陷阱框文字（淺底需加深才讀得清） */
     --blue:#3a6ea5;       /* 圖表 / 因果 */
     --blue-soft:#dde8f3;
     --shadow:0 1px 2px rgba(60,45,20,.06), 0 8px 24px rgba(60,45,20,.07);
@@ -44,6 +45,7 @@
       --teal-soft:#173029;
       --warn:#eb9457;
       --warn-soft:#3a2717;
+      --warn-ink:#f0a877;
       --blue:#7ba7d6;
       --blue-soft:#1b2a3a;
       --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
@@ -65,6 +67,7 @@
     --teal-soft:#173029;
     --warn:#eb9457;
     --warn-soft:#3a2717;
+    --warn-ink:#f0a877;
     --blue:#7ba7d6;
     --blue-soft:#1b2a3a;
     --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
@@ -213,9 +216,9 @@
   .box.teacher .bh{color:var(--teal)}
 
   .box.trap{background:var(--warn-soft);border-color:var(--warn)}
-  .box.trap .bh{color:var(--warn)}
+  .box.trap .bh{color:var(--warn-ink)}
   .trap .no{text-decoration:line-through;color:var(--ink-soft)}
-  .trap .yes{color:var(--warn);font-weight:700}
+  .trap .yes{color:var(--warn-ink);font-weight:700}
 
   .box.detect{background:var(--blue-soft);border-color:var(--blue)}
   .box.detect .bh{color:var(--blue)}
@@ -1008,7 +1011,7 @@
     </div>
     <p>但明清整體趨勢，是慢慢從「開放」轉向「保守、限制對外往來」。這一「收緊」，剛好替下一章埋下伏筆——當西方帶著船堅炮利來敲門時，中國正好處在最封閉的狀態。</p>
     <div class="box detect" style="background:var(--warn-soft);border-color:var(--warn)">
-      <div class="bh" style="color:var(--warn)">🔗 接下一章</div>
+      <div class="bh" style="color:var(--warn-ink)">🔗 接下一章</div>
       <p>明清「向內收緊 ＋ 對外保守」＋ 清朝正逢帝國高峰而自滿 → 第七章<strong>「西方衝擊、被迫開門」</strong>就從這裡開始。</p>
     </div>
 
