@@ -270,6 +270,52 @@
 
   hr.soft{border:0;border-top:1px dashed var(--line-strong);margin:30px 0}
 
+  /* ---------- 總複習速查表 ---------- */
+  #review{background:var(--paper-2);border:1px solid var(--line-strong);
+    border-radius:18px;padding:20px 20px 26px;margin-top:34px;box-shadow:var(--shadow)}
+  .sheet-hero{font-family:var(--serif);font-weight:900;text-align:center;
+    font-size:clamp(15px,3.4vw,19px);line-height:1.6;color:var(--red);
+    background:var(--gold-soft);border-radius:12px;padding:12px 14px;margin:0 0 18px}
+  .tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:8px 0 4px}
+  table.rev{border-collapse:collapse;width:100%;min-width:640px;font-size:13.5px}
+  table.rev th,table.rev td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left}
+  table.rev thead th{background:var(--red);color:#fff;font-family:var(--serif);font-weight:700;
+    position:sticky;top:0}
+  table.rev tbody th{background:var(--red-soft);color:var(--red);font-family:var(--serif);
+    font-weight:900;font-size:15px;white-space:nowrap}
+  table.rev tbody tr:nth-child(even) td{background:color-mix(in srgb,var(--paper) 55%,transparent)}
+  table.rev .kw{color:var(--ink)}
+  table.rev .mn{color:var(--ink-soft);font-style:normal}
+  .rev-h{font-family:var(--serif);font-weight:900;font-size:17px;margin:24px 0 10px;
+    display:flex;align-items:center;gap:8px}
+  .chain{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0}
+  .chain .s{background:var(--card);border:1px solid var(--line-strong);border-radius:9px;
+    padding:7px 11px;font-weight:700;font-size:13.5px;box-shadow:var(--shadow)}
+  .chain .s small{display:block;font-weight:500;color:var(--ink-soft);font-size:11.5px}
+  .chain .s.hl{background:var(--red);color:#fff;border-color:var(--red)}
+  .chain .s.hl small{color:rgba(255,255,255,.85)}
+  .chain .a{color:var(--red);font-weight:900}
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .mini{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 13px;
+    box-shadow:var(--shadow);font-size:13.5px}
+  .mini b{color:var(--red)}
+  .kougo{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+  .kougo .k{background:var(--gold-soft);border:1px solid var(--gold);border-radius:9px;
+    padding:9px 12px;font-family:var(--serif);font-weight:700;font-size:14px;line-height:1.5}
+  .kougo .k b{color:var(--red);font-family:var(--sans);font-size:11.5px;display:block;font-weight:700}
+  .printbtn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--red);
+    background:var(--red);color:#fff;border-radius:10px;padding:9px 16px;font-size:14px;
+    font-weight:700;cursor:pointer;font-family:var(--sans)}
+  .printbtn:hover{filter:brightness(1.06)}
+  .printhint{font-size:12.5px;color:var(--ink-soft);margin-top:8px}
+  @media(max-width:560px){.twocol{grid-template-columns:1fr}}
+  @media print{
+    .bar,footer,.printbtn,.printhint{display:none!important}
+    #review{border:0;box-shadow:none;background:#fff;padding:0}
+    body{background:#fff}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+
   @media(max-width:520px){
     .talk .who{width:38px;height:38px;font-size:18px}
     .creed{padding:15px 17px}
@@ -291,6 +337,7 @@
       <a href="#ch5">第五章</a>
       <a href="#ch6">第六章</a>
       <a href="#ch7">第七章</a>
+      <a href="#review">總複習</a>
     </nav>
     <button class="tbtn" id="theme" title="切換深淺色" aria-label="切換深淺色">◐</button>
   </div>
@@ -380,11 +427,11 @@
         <p>不是五個獨立事件，是一條被撞開的大門。</p>
         <span class="st ready">✓ 完整成品</span>
       </a>
-      <div class="chap disabled">
+      <a class="chap" href="#review">
         <div class="cn">總複習</div><h3>中國史一張 A3 複習完</h3>
-        <p>最後把整套骨架濃縮成一張圖。</p>
-        <span class="st soon">製作中</span>
-      </div>
+        <p>最後把整套骨架濃縮成一張速查表，可列印。</p>
+        <span class="st ready">✓ 完整成品</span>
+      </a>
     </div>
   </section>
 
@@ -1081,6 +1128,92 @@
 
   </section>
 
+  <!-- ================= 總複習速查表 ================= -->
+  <section id="review">
+    <div class="sec-head"><span class="sec-num">A3</span><h2>總複習：中國史一張表複習完</h2></div>
+    <p class="gps-note">考前把這一張看熟就夠了。想帶著走就按下面的按鈕，直接列印或存成 PDF（建議用 A3 或橫式）。</p>
+    <button class="printbtn" id="printBtn">🖨 列印 / 存成 PDF</button>
+    <p class="printhint">＊只會印出這張總複習表，不會把整份講義印出來。</p>
+
+    <div class="sheet-hero" style="margin-top:18px">
+      骨架一句話：統一 → 分裂 → 再統一 → 盛世 → 經濟南移 → 多元交流 → 皇權集中 → 西方衝擊
+    </div>
+
+    <!-- 主表 -->
+    <div class="rev-h">📜 朝代速查表</div>
+    <div class="tblwrap">
+      <table class="rev">
+        <thead><tr><th>朝代</th><th>一句話定位</th><th>必記關鍵字</th><th>記憶口訣</th></tr></thead>
+        <tbody>
+          <tr><th>秦</th><td>第一次大一統</td><td class="kw">文字·貨幣·度量衡·郡縣制</td><td class="mn">連生活規則一起統一</td></tr>
+          <tr><th>漢</th><td>把制度養大成帝國</td><td class="kw">推恩令·尊儒·張騫·絲路</td><td class="mn">對內收權、對外開路</td></tr>
+          <tr><th>魏晉<br>南北朝</th><td>分裂卻更多元</td><td class="kw">人口南移·北魏漢化·佛教石窟</td><td class="mn">人往南，錢也跟著南</td></tr>
+          <tr><th>隋唐</th><td>建系統 → 玩到高峰</td><td class="kw">科舉(隋)·大運河·三省六部·遣唐使</td><td class="mn">隋開高速公路，唐開成盛世</td></tr>
+          <tr><th>宋</th><td>軍事弱卻經濟文化強</td><td class="kw">重文輕武·三大發明·交子·海上貿易</td><td class="mn">國家的強不只有軍事</td></tr>
+          <tr><th>元</th><td>超大地圖帝國</td><td class="kw">東西交流·馬可波羅·行省</td><td class="mn">元 ＝ 交流</td></tr>
+          <tr><th>明清</th><td>皇權集中</td><td class="kw">廢丞相(明)·軍機處(清)·鄭和下西洋</td><td class="mn">皇帝把控制器拿回手上</td></tr>
+          <tr><th>近代</th><td>被迫開門</td><td class="kw">鴉片→南京·甲午→馬關(割台)·八國→辛丑</td><td class="mn">大門一直被撞</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 三大跨章主線 -->
+    <div class="rev-h">🔗 三大跨章主線（最愛跨章考）</div>
+
+    <div class="mini" style="margin-bottom:10px"><b>① 經濟重心南移</b>（開始 vs 完成，最常挖洞）</div>
+    <div class="chain">
+      <span class="s hl">魏晉南北朝<small>開始（人口南遷）</small></span>
+      <span class="a">→</span>
+      <span class="s">隋唐宋<small>持續發展</small></span>
+      <span class="a">→</span>
+      <span class="s hl">南宋<small>完成（南方超越北方）</small></span>
+    </div>
+
+    <div class="mini" style="margin:14px 0 10px"><b>② 中央集權制度演變</b>（別張冠李戴）</div>
+    <div class="chain">
+      <span class="s">郡縣制<small>秦·管地方</small></span><span class="a">→</span>
+      <span class="s">推恩令<small>漢·削諸侯</small></span><span class="a">→</span>
+      <span class="s">三省六部<small>唐·中央分工</small></span><span class="a">→</span>
+      <span class="s">行省<small>元·管地方</small></span><span class="a">→</span>
+      <span class="s">廢丞相<small>明·提皇權</small></span><span class="a">→</span>
+      <span class="s hl">軍機處<small>清·皇權頂峰</small></span>
+    </div>
+
+    <div class="mini" style="margin:14px 0 10px"><b>③ 近代戰爭 × 條約配對</b>（別配錯）</div>
+    <div class="twocol">
+      <div class="mini">⚔️ 鴉片戰爭 → 📜 <b>南京條約</b><br>五口通商·<b>割香港島</b>·賠款（起點）</div>
+      <div class="mini">⚔️ 英法聯軍 → 📜 <b>更多條約</b><br>增開口岸·賠款（列強要更多）</div>
+      <div class="mini">⚔️ 甲午戰爭 → 📜 <b>馬關條約</b><br><b>割台灣、澎湖</b>給日本·鉅額賠款</div>
+      <div class="mini">⚔️ 八國聯軍 → 📜 <b>辛丑條約</b><br>鉅額賠款·列強勢力最深</div>
+    </div>
+
+    <!-- 口訣總表 -->
+    <div class="rev-h">🧠 八大記憶口訣</div>
+    <div class="kougo">
+      <div class="k"><b>秦</b>連生活規則一起統一</div>
+      <div class="k"><b>漢武帝</b>對內收權、對外開路</div>
+      <div class="k"><b>魏晉南北朝</b>人往南，錢也跟著南</div>
+      <div class="k"><b>隋唐</b>隋開高速公路，唐開成盛世</div>
+      <div class="k"><b>宋</b>國家的強，不只有軍事</div>
+      <div class="k"><b>元</b>元 ＝ 交流</div>
+      <div class="k"><b>明清</b>皇帝把控制器拿回自己手上</div>
+      <div class="k"><b>近代</b>不是五件事，是一條被撞的大門</div>
+    </div>
+
+    <!-- 陷阱總表 -->
+    <div class="rev-h">⚠️ 高頻陷阱一次收</div>
+    <div class="twocol">
+      <div class="mini"><b>科舉</b>起於<b>隋</b>、完備於唐（不是唐發明）</div>
+      <div class="mini"><b>三大發明</b>宋代「發揚／廣泛應用」，不是發明</div>
+      <div class="mini"><b>經濟南移</b>開始＝魏晉南北朝、完成＝南宋</div>
+      <div class="mini"><b>行省</b>(元·地方) ≠ <b>三省六部</b>(唐·中央)</div>
+      <div class="mini"><b>大運河</b>影響是促進交流（別選「造成隋亡」）</div>
+      <div class="mini"><b>明內閣</b> ≠ 恢復丞相（皇權只增不減）</div>
+      <div class="mini"><b>割香港島</b>(英·南京條約) ≠ <b>割台灣</b>(日·馬關條約)</div>
+      <div class="mini"><b>人物評價 ≠ 歷史結果</b>（楊廣壞，但大運河很有用）</div>
+    </div>
+  </section>
+
   <footer>
     <p class="disc">本講義為原創教學設計，不抄錄歷屆會考或學校試卷；題目均依公開試題的<b>題型與考點</b>重新設計。內容以翰林／康軒／南一三版本共同核心為準，實際授課請對照學生使用版本。</p>
     <p>《八年級歷史：不用死背的中國史》· 第一章 完整成品 · 其餘章節製作中</p>
@@ -1360,5 +1493,24 @@
   mountQuiz('quizzes5', qs5);
   mountQuiz('quizzes6', qs6);
   mountQuiz('quizzes7', qs7);
+
+  /* 只列印總複習表 */
+  var pb=document.getElementById('printBtn');
+  if(pb){
+    pb.addEventListener('click',function(){
+      var review=document.getElementById('review');
+      var hidden=[];
+      document.querySelectorAll('header.bar, .wrap > *').forEach(function(el){
+        if(el!==review && !el.hidden){ el.hidden=true; hidden.push(el); }
+      });
+      function restore(){
+        hidden.forEach(function(el){el.hidden=false;});
+        window.removeEventListener('afterprint',restore);
+      }
+      window.addEventListener('afterprint',restore);
+      window.print();
+      setTimeout(restore, 1500);
+    });
+  }
 })();
 </script>
